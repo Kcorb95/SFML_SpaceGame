@@ -1,14 +1,18 @@
-//#include "stdafx.h"
+// Include important C++ libraries here
+#ifdef _MSC_VER
+#include "stdafx.h"
+#endif
+#include <iostream>
 #include <SFML/Graphics.hpp>
-#include "FarOut.h"
+#include "screens.hpp"
 
 using namespace sf;
 
-int main()
+int main(int argc, char** argv)
 {
-	// Start with the MENU state
-	State state = State::MENU;
-
+	//Applications variables
+	std::vector<cScreen*> Screens;
+	int screen = 0;
 
 	// Get the screen resolution and create an SFML window
 	Vector2f resolution;
@@ -17,43 +21,15 @@ int main()
 
 	RenderWindow window(VideoMode(resolution.x, resolution.y), "FarOut", Style::Fullscreen);
 
-	// Create a an SFML View for the main action
-	View mainView(sf::FloatRect(0, 0, resolution.x, resolution.y));
+	//Screens preparations
+	screenMenu sM;
+	Screens.push_back(&sM);
 
-	// Where is the mouse in relation to world coordinates
-	Vector2f mouseWorldPosition;
-	// Where is the mouse in relation to screen coordinates
-	Vector2i mouseScreenPosition;
-
-	// The main game loop
-	while (window.isOpen())
+	//Main loop
+	while (screen >= 0)
 	{
-		/*
-		************
-		Handle input
-		************
-		*/
-
-		// Handle events
-		Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == Event::KeyPressed)
-			{
-				// Pause a game while playing
-				if (event.key.code == Keyboard::Escape && state == State::PLAYING)
-				{
-					state = State::PAUSED;
-					//make menu
-				}
-
-				// Restart while paused
-				else if (event.key.code == Keyboard::Escape &&
-					state == State::PAUSED)
-				{
-					state = State::PLAYING;
-				}
-			}
-		}//end event polling
+		screen = Screens[screen]->Run(window);
 	}
+
+	return EXIT_SUCCESS;
 }
