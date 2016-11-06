@@ -15,15 +15,11 @@ int screenGame::Run(RenderWindow &window)
 	// Start with the GAME_OVER state
 	State state = State::GAME_OVER;
 	// Get the screen resolution and create an SFML window
-	Vector2f resolution;
-	resolution.x = VideoMode::getDesktopMode().width;
-	resolution.y = VideoMode::getDesktopMode().height;
 	Event Event;
 	bool Running = true;
 	Texture textureBackground;
 	Sprite spriteBackground;
 	Player player;
-	IntRect space;
 	//TODO Make work with texture handler
 	if (!textureBackground.loadFromFile("graphics/backgroundLevelOne.png"))
 	{
@@ -73,12 +69,12 @@ int screenGame::Run(RenderWindow &window)
 
 		if (state == State::PLAYING)
 		{
-			player.spawn(resolution);
+			player.spawn();
 		}//end start setup
 		
 		if (state == State::PLAYING)
 		{
-
+			player.update();
 		}//end update scene
 
 		 /*

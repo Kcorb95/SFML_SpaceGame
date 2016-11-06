@@ -11,7 +11,7 @@ private:
 	const float START_DAMAGE = 10;
 
 	// Where is the player
-	Vector2f m_Position;
+	Vector2f positionPlayer;
 
 	// Of course we will need a sprite
 	Sprite spritePlayer;
@@ -44,7 +44,7 @@ public:
 	// Call this at the end of every game
 	void resetPlayerStats();
 
-	void spawn(Vector2f resolution);
+	void spawn();
 
 	// Where is the player
 	FloatRect getPosition();
@@ -63,6 +63,9 @@ public:
 
 	// How much damage can the player do per attack?
 	int getDamage();
+
+	//Called once every frame to update player
+	void update();
 
 	// Give the player some armor
 	void upgradeArmor();

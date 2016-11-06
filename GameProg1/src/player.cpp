@@ -18,7 +18,7 @@ Player::Player()
 	spritePlayer.setTexture(texturePlayer);
 
 	//Set the origin of the sprite to the center
-	spritePlayer.setOrigin(25, 25);
+	spritePlayer.setOrigin(139.5, 174);
 }
 
 void Player::resetPlayerStats()
@@ -29,18 +29,17 @@ void Player::resetPlayerStats()
 	m_MaxHealth = START_HEALTH;
 	m_Damage = START_DAMAGE;
 	m_MaxDamage = START_DAMAGE;
-
 }
 
-void Player::spawn(Vector2f resolution)
+void Player::spawn()
 {
 	//Place the player in the middle of the screen on the left side
-	m_Position.x = resolution.x / 2;
-	m_Position.y = resolution.y / 2;
+	positionPlayer.x = VideoMode::getDesktopMode().width / 7;
+	positionPlayer.y = VideoMode::getDesktopMode().height / 2;
 
 	// Strore the resolution for future use
-	m_Resolution.x = resolution.x;
-	m_Resolution.y = resolution.y;
+	m_Resolution.x = VideoMode::getDesktopMode().width;
+	m_Resolution.y = VideoMode::getDesktopMode().height;
 }
 
 FloatRect Player::getPosition()
@@ -50,12 +49,17 @@ FloatRect Player::getPosition()
 
 Vector2f Player::getCenter()
 {
-	return m_Position;
+	return positionPlayer;
 }
 
 Sprite Player::getSprite()
 {
 	return spritePlayer;
+}
+
+void Player::update()
+{
+	spritePlayer.setPosition(positionPlayer);
 }
 
 int Player::getArmor()
