@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\cScreen.hpp" />
+    <ClInclude Include="src\Enemy.h" />
     <ClInclude Include="src\player.h" />
     <ClInclude Include="src\screenGame.hpp" />
     <ClInclude Include="src\screenMenu.hpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="src\targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\FarOut.cpp" />
     <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\screenGame.cpp" />

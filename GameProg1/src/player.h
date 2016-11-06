@@ -6,9 +6,9 @@ using namespace sf;
 class Player
 {
 private:
-	const float START_ARMOR = 100;
-	const float START_HEALTH = 100;
-	const float START_DAMAGE = 10;
+	const int START_ARMOR = 100;
+	const int START_HEALTH = 100;
+	const int START_DAMAGE = 10;
 
 	// Where is the player
 	Vector2f positionPlayer;
@@ -24,19 +24,19 @@ private:
 	Vector2f m_Resolution;
 
 	// How much armor has the player got?
-	int m_Armor;
+	int armorPlayer;
 	// What is the maximum armor the player can have
-	int m_MaxArmor;
+	int maxArmorPlayer;
 
 	// How much health has the player got?
-	int m_Health;
+	int healthPlayer;
 	// What is the maximum health the player can have
-	int m_MaxHealth;
+	int maxHealthPlayer;
 
 	// How much damage can the player do per attack?
-	int m_Damage;
+	int damagePlayer;
 	//What is the maximum amount of damage a player can do
-	int m_MaxDamage;
+	int maxDamagePlayer;
 
 public:
 	Player();

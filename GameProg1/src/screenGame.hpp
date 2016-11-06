@@ -9,9 +9,8 @@ enum class State { GAME_OVER, PLAYING };
 
 class screenGame : public cScreen
 {
-private:
-
 public:
-	screenGame(void);
+	// Get the screen resolution and create an SFML window
+	Vector2f resolution;
 	virtual int Run(sf::RenderWindow &window);
 };

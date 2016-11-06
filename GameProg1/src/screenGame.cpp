@@ -1,14 +1,12 @@
 #include <iostream>
+#include <sstream>
+#include <fstream>
 #include "screenGame.hpp"
 #include "player.h"
+#include "enemy.h"
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
-
-screenGame::screenGame(void)
-{
-	
-}
 
 int screenGame::Run(RenderWindow &window)
 {
@@ -20,6 +18,7 @@ int screenGame::Run(RenderWindow &window)
 	Texture textureBackground;
 	Sprite spriteBackground;
 	Player player;
+	Enemy enemy;
 	//TODO Make work with texture handler
 	if (!textureBackground.loadFromFile("graphics/backgroundLevelOne.png"))
 	{
@@ -28,6 +27,45 @@ int screenGame::Run(RenderWindow &window)
 	}
 	spriteBackground.setTexture(textureBackground);
 
+	resolution.x = VideoMode::getDesktopMode().width;
+	resolution.y = VideoMode::getDesktopMode().height;
+	View hudView(FloatRect(0, 0, resolution.x, resolution.y));
+	
+	//Load font
+	Font font;
+	if (!font.loadFromFile("fonts/Gang Wolfik Craze.otf"))
+	{
+		std::cerr << "Error loading fonts/Gang Wolfik Craze.otf" << std::endl;
+		return (-1);
+	}
+
+	//Player Armor
+	Text textPlayerArmor;
+	textPlayerArmor.setFont(font);
+	textPlayerArmor.setCharacterSize(40);
+	textPlayerArmor.setFillColor(Color::White);
+	textPlayerArmor.setPosition(resolution.x / 40, resolution.y / 60);
+
+	//Player Health
+	Text textPlayerHealth;
+	textPlayerHealth.setFont(font);
+	textPlayerHealth.setCharacterSize(40);
+	textPlayerHealth.setFillColor(Color::White);
+	textPlayerHealth.setPosition(resolution.x / 40, resolution.y / 20);
+
+	//Enemy Armor
+	Text textEnemyArmor;
+	textEnemyArmor.setFont(font);
+	textEnemyArmor.setCharacterSize(40);
+	textEnemyArmor.setFillColor(Color::White);
+	textEnemyArmor.setPosition(resolution.x/1.2, resolution.y / 60);
+
+	//Enemy Health
+	Text textEnemyHealth;
+	textEnemyHealth.setFont(font);
+	textEnemyHealth.setCharacterSize(40);
+	textEnemyHealth.setFillColor(Color::White);
+	textEnemyHealth.setPosition(resolution.x/1.2, resolution.y / 20);
 
 	while (Running)
 	{
@@ -62,6 +100,7 @@ int screenGame::Run(RenderWindow &window)
 			}
 		}//End Event polling
 
+		//Handle controls while playing
 		if (state == State::PLAYING)
 		{
 
@@ -70,11 +109,34 @@ int screenGame::Run(RenderWindow &window)
 		if (state == State::PLAYING)
 		{
 			player.spawn();
+			enemy.spawn(0);//spawn small enemy
 		}//end start setup
 		
+		/*
+		****************
+		UPDATE THE FRAME
+		****************
+		*/
 		if (state == State::PLAYING)
 		{
+			std::stringstream ssPlayerArmor;
+			std::stringstream ssPlayerHealth;
+
+			std::stringstream ssEnemyArmor;
+			std::stringstream ssEnemyHealth;
+
+			ssPlayerArmor << "Armor: " << player.getArmor();
+			ssPlayerHealth << "Health: " << player.getHealth();
+			ssEnemyArmor << "Armor: " << enemy.getArmor();
+			ssEnemyHealth << "Health: " << enemy.getHealth();
+
+			textPlayerArmor.setString(ssPlayerArmor.str());
+			textPlayerHealth.setString(ssPlayerHealth.str());
+			textEnemyArmor.setString(ssEnemyArmor.str());
+			textEnemyHealth.setString(ssEnemyHealth.str());
+
 			player.update();
+			enemy.update();
 		}//end update scene
 
 		 /*
@@ -90,6 +152,11 @@ int screenGame::Run(RenderWindow &window)
 			//Drawing
 			window.draw(spriteBackground);
 			window.draw(player.getSprite());
+			window.draw(enemy.getSprite());
+			window.draw(textPlayerArmor);
+			window.draw(textPlayerHealth);
+			window.draw(textEnemyArmor);
+			window.draw(textEnemyHealth);
 		}
 
 		window.display();

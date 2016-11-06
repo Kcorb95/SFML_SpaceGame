@@ -4,11 +4,11 @@
 
 Player::Player()
 {
-	m_Armor = START_ARMOR;
-	m_MaxArmor = START_ARMOR;
-	m_Health = START_HEALTH;
-	m_MaxHealth = START_HEALTH;
-	m_Damage = START_DAMAGE;
+	armorPlayer = START_ARMOR;
+	maxArmorPlayer = START_ARMOR;
+	healthPlayer = START_HEALTH;
+	maxHealthPlayer = START_HEALTH;
+	damagePlayer = START_DAMAGE;
 
 	//Associate a texture with our player sprite
 	if (!texturePlayer.loadFromFile("graphics/shipThree.png"))
@@ -23,12 +23,12 @@ Player::Player()
 
 void Player::resetPlayerStats()
 {
-	m_Armor = START_ARMOR;
-	m_MaxArmor = START_ARMOR;
-	m_Health = START_HEALTH;
-	m_MaxHealth = START_HEALTH;
-	m_Damage = START_DAMAGE;
-	m_MaxDamage = START_DAMAGE;
+	armorPlayer = START_ARMOR;
+	maxArmorPlayer = START_ARMOR;
+	healthPlayer = START_HEALTH;
+	maxHealthPlayer = START_HEALTH;
+	damagePlayer = START_DAMAGE;
+	maxDamagePlayer = START_DAMAGE;
 }
 
 void Player::spawn()
@@ -64,67 +64,67 @@ void Player::update()
 
 int Player::getArmor()
 {
-	return m_Armor;
+	return armorPlayer;
 }
 
 int Player::getHealth()
 {
-	return m_Health;
+	return healthPlayer;
 }
 
 int Player::getDamage()
 {
-	return m_Damage;
+	return damagePlayer;
 }
 
 void Player::upgradeArmor()
 {
 	// Increase max Armor by 10 points
-	m_MaxArmor += (START_ARMOR + 10);
+	maxArmorPlayer += (START_ARMOR + 10);
 }
 
 void Player::upgradeHealth()
 {
 	// Increase max Health by 10 points
-	m_MaxHealth += (START_HEALTH + 10);
+	maxHealthPlayer += (START_HEALTH + 10);
 }
 
 void Player::upgradeDamage()
 {
 	// Increase damage per attack by 1
-	m_MaxDamage += (START_DAMAGE + 1);
+	maxDamagePlayer += (START_DAMAGE + 1);
 }
 
 void Player::increaseArmorLevel(int amount)
 {
-	m_Armor += amount;
+	armorPlayer += amount;
 
 	// But not beyond the maximum
-	if (m_Armor > m_MaxArmor)
+	if (armorPlayer > maxArmorPlayer)
 	{
-		m_Armor = m_MaxArmor;
+		armorPlayer = maxArmorPlayer;
 	}
 }
 
 void Player::increaseHealthLevel(int amount)
 {
-	m_Health += amount;
+	healthPlayer += amount;
 
 	// But not beyond the maximum
-	if (m_Health > m_MaxHealth)
+	if (healthPlayer > maxHealthPlayer)
 	{
-		m_Health = m_MaxHealth;
+		healthPlayer = maxHealthPlayer;
 	}
 }
 
 void Player::increaseDamageAmount(int amount)
 {
-	m_Damage += amount;
+	damagePlayer += amount;
 
 	// But not beyond the maximum
-	if (m_Damage > m_MaxDamage)
+	if (damagePlayer > maxDamagePlayer)
 	{
-		m_Damage = m_MaxDamage;
+		damagePlayer = maxDamagePlayer;
 	}
 }
 

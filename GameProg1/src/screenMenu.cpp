@@ -19,7 +19,7 @@ int screenMenu::Run(RenderWindow &window)
 	Texture textureBackground;
 	Sprite spriteBackground;
 	int alpha = 0;
-	Font Font;
+	Font font;
 	Text optionPlay;
 	Text optionExit;
 	Text optionContinue;
@@ -31,25 +31,25 @@ int screenMenu::Run(RenderWindow &window)
 		return (-1);
 	}
 	spriteBackground.setTexture(textureBackground);
-	if (!Font.loadFromFile("KOMIKAP_.ttf"))
+	if (!font.loadFromFile("fonts/Game Robot.ttf"))
 	{
-		std::cerr << "Error loading KOMIKAP_.ttf" << std::endl;
+		std::cerr << "Error loading fonts/Game Robot.ttf" << std::endl;
 		return (-1);
 	}
-	optionPlay.setFont(Font);
-	optionPlay.setCharacterSize(60);
+	optionPlay.setFont(font);
+	optionPlay.setCharacterSize(100);
 	optionPlay.setString("Play");
-	optionPlay.setPosition({ VideoMode::getDesktopMode().width / 2.f, VideoMode::getDesktopMode().height / 2.5f });
+	optionPlay.setPosition({ VideoMode::getDesktopMode().width / 2.2f, VideoMode::getDesktopMode().height / 3.0f });
 
-	optionExit.setFont(Font);
-	optionExit.setCharacterSize(60);
+	optionExit.setFont(font);
+	optionExit.setCharacterSize(100);
 	optionExit.setString("Exit");
-	optionExit.setPosition({ VideoMode::getDesktopMode().width / 2.f, VideoMode::getDesktopMode().height / 2.f });
+	optionExit.setPosition({ VideoMode::getDesktopMode().width / 2.2f, VideoMode::getDesktopMode().height / 2.0f });
 
-	optionContinue.setFont(Font);
-	optionContinue.setCharacterSize(60);
+	optionContinue.setFont(font);
+	optionContinue.setCharacterSize(100);
 	optionContinue.setString("Continue");
-	optionContinue.setPosition({ VideoMode::getDesktopMode().width / 2.f, VideoMode::getDesktopMode().height / 2.5f });
+	optionContinue.setPosition({ VideoMode::getDesktopMode().width / 2.2f, VideoMode::getDesktopMode().height / 3.0f });
 
 	if (playing)
 	{
