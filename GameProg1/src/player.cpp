@@ -1,6 +1,6 @@
+#include <iostream>
 #include "stdafx.h"
 #include "player.h"
-#include "TextureHolder.h"
 
 Player::Player()
 {
@@ -11,10 +11,14 @@ Player::Player()
 	m_Damage = START_DAMAGE;
 
 	//Associate a texture with our player sprite
-	m_Sprite = Sprite(TextureHolder::GetTexture("graphics/shipThree.png"));
+	if (!texturePlayer.loadFromFile("graphics/shipThree.png"))
+	{
+		std::cerr << "Error loading graphics/shipThree.png" << std::endl;
+	}
+	spritePlayer.setTexture(texturePlayer);
 
 	//Set the origin of the sprite to the center
-	m_Sprite.setOrigin(25, 25);
+	spritePlayer.setOrigin(25, 25);
 }
 
 void Player::resetPlayerStats()
@@ -28,11 +32,11 @@ void Player::resetPlayerStats()
 
 }
 
-void Player::spawn(IntRect space, Vector2f resolution)
+void Player::spawn(Vector2f resolution)
 {
 	//Place the player in the middle of the screen on the left side
-	m_Position.x = space.width / 2;
-	m_Position.y = space.height / 2;
+	m_Position.x = resolution.x / 2;
+	m_Position.y = resolution.y / 2;
 
 	// Strore the resolution for future use
 	m_Resolution.x = resolution.x;
@@ -41,7 +45,7 @@ void Player::spawn(IntRect space, Vector2f resolution)
 
 FloatRect Player::getPosition()
 {
-	return m_Sprite.getGlobalBounds();
+	return spritePlayer.getGlobalBounds();
 }
 
 Vector2f Player::getCenter()
@@ -51,7 +55,7 @@ Vector2f Player::getCenter()
 
 Sprite Player::getSprite()
 {
-	return m_Sprite;
+	return spritePlayer;
 }
 
 int Player::getArmor()

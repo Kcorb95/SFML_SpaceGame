@@ -14,11 +14,11 @@ private:
 	Vector2f m_Position;
 
 	// Of course we will need a sprite
-	Sprite m_Sprite;
+	Sprite spritePlayer;
 
 	// And a texture
 	// !!Watch this space!!
-	Texture m_Texture;
+	Texture texturePlayer;
 
 	// What is the screen resolution
 	Vector2f m_Resolution;
@@ -44,7 +44,7 @@ public:
 	// Call this at the end of every game
 	void resetPlayerStats();
 
-	void spawn(IntRect space, Vector2f resolution);
+	void spawn(Vector2f resolution);
 
 	// Where is the player
 	FloatRect getPosition();

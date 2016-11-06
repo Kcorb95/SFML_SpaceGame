@@ -160,7 +160,6 @@
     <ClInclude Include="src\screens.hpp" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\targetver.h" />
-    <ClInclude Include="src\TextureHolder.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\FarOut.cpp" />
@@ -168,7 +167,6 @@
     <ClCompile Include="src\screenGame.cpp" />
     <ClCompile Include="src\screenMenu.cpp" />
     <ClCompile Include="src\stdafx.cpp" />
-    <ClCompile Include="src\TextureHolder.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
