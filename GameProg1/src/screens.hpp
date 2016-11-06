@@ -6,5 +6,6 @@
 
 //Including each screen of application
 #include "screenMenu.hpp"
+#include "screenGame.hpp"
 
 #endif // SCREENS_HPP_INCLUDED

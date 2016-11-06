@@ -24,6 +24,8 @@ int main(int argc, char** argv)
 	//Screens preparations
 	screenMenu sM;
 	Screens.push_back(&sM);
+	screenGame sG;
+	Screens.push_back(&sG);
 
 	//Main loop
 	while (screen >= 0)
