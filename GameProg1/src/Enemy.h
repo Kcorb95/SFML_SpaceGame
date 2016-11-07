@@ -10,24 +10,26 @@ private:
 	const int START_HEALTH = 100;
 
 	// Where is this enemy located?
-	Vector2f positionEnemy;
+	Vector2f m_PositionEnemy;
 
 	// And a texture
-	Texture textureEnemy;
+	Texture m_TextureEnemy;
 
 	// A sprite for the enemy
-	Sprite spriteEnemy;
+	Sprite m_SpriteEnemy;
 
 	// How much health has it got?
-	int healthEnemy;
+	int m_HealthEnemy;
 
 	// How much armor has it got?
-	int armorEnemy;
+	int m_ArmorEnemy;
 
 	// Is it still alive?
-	bool enemyIsAlive;
+	bool m_IsAlive;
 
 public:
+	void recieveDamage(int amount);
+
 	// Find out if the zombie is alive
 	bool isAlive();
 

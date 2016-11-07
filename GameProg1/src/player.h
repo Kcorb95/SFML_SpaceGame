@@ -1,5 +1,7 @@
 #pragma once
+#include <vector>
 #include <SFML\Graphics.hpp>
+#include "Weapon.h"
 
 using namespace sf;
 
@@ -10,41 +12,49 @@ private:
 	const int START_HEALTH = 100;
 	const int START_DAMAGE = 10;
 
+	bool m_IsAlive = true;
+
 	// Where is the player
-	Vector2f positionPlayer;
+	Vector2f m_PositionPlayer;
 
 	// Of course we will need a sprite
-	Sprite spritePlayer;
+	Sprite m_SpritePlayer;
 
 	// And a texture
 	// !!Watch this space!!
-	Texture texturePlayer;
+	Texture m_TexturePlayer;
 
 	// What is the screen resolution
 	Vector2f m_Resolution;
 
 	// How much armor has the player got?
-	int armorPlayer;
+	int m_ArmorPlayer;
 	// What is the maximum armor the player can have
-	int maxArmorPlayer;
+	int m_MaxArmorPlayer;
 
 	// How much health has the player got?
-	int healthPlayer;
+	int m_HealthPlayer;
 	// What is the maximum health the player can have
-	int maxHealthPlayer;
+	int m_MaxHealthPlayer;
 
 	// How much damage can the player do per attack?
-	int damagePlayer;
+	int m_DamagePlayer;
 	//What is the maximum amount of damage a player can do
-	int maxDamagePlayer;
+	int m_MaxDamagePlayer;
+
+	std::vector<Weapon> weapons;
 
 public:
 	Player();
+
+	bool isAlive();
 
 	// Call this at the end of every game
 	void resetPlayerStats();
 
 	void spawn();
+
+	void recieveDamage(int amount);
 
 	// Where is the player
 	FloatRect getPosition();
@@ -54,6 +64,8 @@ public:
 
 	// Send a copy of the sprite to main
 	Sprite getSprite();
+
+	Weapon getWeapon(int index);
 
 	// How much armor has the player currently got?
 	int getArmor();

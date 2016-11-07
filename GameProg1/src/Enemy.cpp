@@ -15,79 +15,91 @@ void Enemy::spawn(int type)
 	case 0:
 		// Small Enemy
 		//Associate a texture with our player sprite
-		if (!textureEnemy.loadFromFile("graphics/shipThree.png"))
+		if (!m_TextureEnemy.loadFromFile("graphics/shipThree.png"))
 		{
 			std::cerr << "Error loading graphics/shipThree.png" << std::endl;
 		}
-		spriteEnemy.setTexture(textureEnemy);
+		m_SpriteEnemy.setTexture(m_TextureEnemy);
 
-		armorEnemy = 100;
-		healthEnemy = 100;
+		m_ArmorEnemy = 100;
+		m_HealthEnemy = 100;
 		break;
 
 	case 1:
 		// Medium Enemy
 		//Associate a texture with our player sprite
-		if (!textureEnemy.loadFromFile("graphics/shipThree.png"))
+		if (!m_TextureEnemy.loadFromFile("graphics/shipThree.png"))
 		{
 			std::cerr << "Error loading graphics/shipThree.png" << std::endl;
 		}
-		spriteEnemy.setTexture(textureEnemy);
+		m_SpriteEnemy.setTexture(m_TextureEnemy);
 
-		armorEnemy = 150;
-		healthEnemy = 150;
+		m_ArmorEnemy = 150;
+		m_HealthEnemy = 150;
 		break;
 
 	case 2:
 		// Large Enemy
 		//Associate a texture with our player sprite
-		if (!textureEnemy.loadFromFile("graphics/shipThree.png"))
+		if (!m_TextureEnemy.loadFromFile("graphics/shipThree.png"))
 		{
 			std::cerr << "Error loading graphics/shipThree.png" << std::endl;
 		}
-		spriteEnemy.setTexture(textureEnemy);
+		m_SpriteEnemy.setTexture(m_TextureEnemy);
 
-		armorEnemy = 200;
-		healthEnemy = 200;
+		m_ArmorEnemy = 200;
+		m_HealthEnemy = 200;
 		break;
 	}
 
-	positionEnemy.x = VideoMode::getDesktopMode().width / 1.135;
-	positionEnemy.y = VideoMode::getDesktopMode().height / 2;
+	m_PositionEnemy.x = VideoMode::getDesktopMode().width / 1.135;
+	m_PositionEnemy.y = VideoMode::getDesktopMode().height / 2;
 
-	spriteEnemy.setOrigin(139.5, 174);
-	spriteEnemy.setRotation(180);
-	spriteEnemy.setPosition(positionEnemy);
+	m_SpriteEnemy.setOrigin(139.5, 174);
+	m_SpriteEnemy.setRotation(180);
+	m_SpriteEnemy.setPosition(m_PositionEnemy);
+}
+
+void Enemy::recieveDamage(int amount)
+{
+	if (amount <= m_HealthEnemy)
+	{
+		m_HealthEnemy -= amount;
+	}
+	else
+	{
+		m_IsAlive = false;
+	}
 }
 
 bool Enemy::isAlive()
 {
-	return enemyIsAlive;
+	return m_IsAlive;
 }
 
 FloatRect Enemy::getPosition()
 {
-	return spriteEnemy.getGlobalBounds();
+	return m_SpriteEnemy.getGlobalBounds();
 }
 
 
 Sprite Enemy::getSprite()
 {
-	return spriteEnemy;
+	return m_SpriteEnemy;
 }
 
 int Enemy::getArmor()
 {
-	return armorEnemy;
+	return m_ArmorEnemy;
 }
 
 int Enemy::getHealth()
 {
-	return healthEnemy;
+	return m_HealthEnemy;
 }
 
 void Enemy::update()
 {
 	// Move the sprite
-	spriteEnemy.setPosition(positionEnemy);
+	m_SpriteEnemy.setPosition(m_PositionEnemy);
 }

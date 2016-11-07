@@ -4,38 +4,66 @@
 
 Player::Player()
 {
-	armorPlayer = START_ARMOR;
-	maxArmorPlayer = START_ARMOR;
-	healthPlayer = START_HEALTH;
-	maxHealthPlayer = START_HEALTH;
-	damagePlayer = START_DAMAGE;
+	m_ArmorPlayer = START_ARMOR;
+	m_MaxArmorPlayer = START_ARMOR;
+	m_HealthPlayer = START_HEALTH;
+	m_MaxHealthPlayer = START_HEALTH;
+	m_DamagePlayer = START_DAMAGE;
+	Weapon basicRail = Weapon("Basic Railgun", "Kinetic", 5, 50, 50, 0);
+	Weapon basicMissile = Weapon("Basic Missile Launcher", "Ballistic", 10, 5, 5, 2);
+
+	weapons.push_back(basicRail);
+	weapons.push_back(basicMissile);
 
 	//Associate a texture with our player sprite
-	if (!texturePlayer.loadFromFile("graphics/shipThree.png"))
+	if (!m_TexturePlayer.loadFromFile("graphics/shipThree.png"))
 	{
 		std::cerr << "Error loading graphics/shipThree.png" << std::endl;
 	}
-	spritePlayer.setTexture(texturePlayer);
+	m_SpritePlayer.setTexture(m_TexturePlayer);
 
 	//Set the origin of the sprite to the center
-	spritePlayer.setOrigin(139.5, 174);
+	m_SpritePlayer.setOrigin(139.5, 174);
+}
+
+void Player::recieveDamage(int amount)
+{
+	if (amount <= m_HealthPlayer)
+	{
+		m_HealthPlayer -= amount;
+	}
+	else
+	{
+		m_IsAlive = false;
+	}
+}
+
+bool Player::isAlive()
+{
+	return m_IsAlive;
+}
+
+Weapon Player::getWeapon(int index)
+{
+	if (index > weapons.size())
+	return weapons.at(index);
 }
 
 void Player::resetPlayerStats()
 {
-	armorPlayer = START_ARMOR;
-	maxArmorPlayer = START_ARMOR;
-	healthPlayer = START_HEALTH;
-	maxHealthPlayer = START_HEALTH;
-	damagePlayer = START_DAMAGE;
-	maxDamagePlayer = START_DAMAGE;
+	m_ArmorPlayer = START_ARMOR;
+	m_MaxArmorPlayer = START_ARMOR;
+	m_HealthPlayer = START_HEALTH;
+	m_MaxHealthPlayer = START_HEALTH;
+	m_DamagePlayer = START_DAMAGE;
+	m_MaxDamagePlayer = START_DAMAGE;
 }
 
 void Player::spawn()
 {
 	//Place the player in the middle of the screen on the left side
-	positionPlayer.x = VideoMode::getDesktopMode().width / 7;
-	positionPlayer.y = VideoMode::getDesktopMode().height / 2;
+	m_PositionPlayer.x = VideoMode::getDesktopMode().width / 7;
+	m_PositionPlayer.y = VideoMode::getDesktopMode().height / 2;
 
 	// Strore the resolution for future use
 	m_Resolution.x = VideoMode::getDesktopMode().width;
@@ -44,87 +72,87 @@ void Player::spawn()
 
 FloatRect Player::getPosition()
 {
-	return spritePlayer.getGlobalBounds();
+	return m_SpritePlayer.getGlobalBounds();
 }
 
 Vector2f Player::getCenter()
 {
-	return positionPlayer;
+	return m_PositionPlayer;
 }
 
 Sprite Player::getSprite()
 {
-	return spritePlayer;
+	return m_SpritePlayer;
 }
 
 void Player::update()
 {
-	spritePlayer.setPosition(positionPlayer);
+	m_SpritePlayer.setPosition(m_PositionPlayer);
 }
 
 int Player::getArmor()
 {
-	return armorPlayer;
+	return m_ArmorPlayer;
 }
 
 int Player::getHealth()
 {
-	return healthPlayer;
+	return m_HealthPlayer;
 }
 
 int Player::getDamage()
 {
-	return damagePlayer;
+	return m_DamagePlayer;
 }
 
 void Player::upgradeArmor()
 {
 	// Increase max Armor by 10 points
-	maxArmorPlayer += (START_ARMOR + 10);
+	m_MaxArmorPlayer += (START_ARMOR + 10);
 }
 
 void Player::upgradeHealth()
 {
 	// Increase max Health by 10 points
-	maxHealthPlayer += (START_HEALTH + 10);
+	m_MaxHealthPlayer += (START_HEALTH + 10);
 }
 
 void Player::upgradeDamage()
 {
 	// Increase damage per attack by 1
-	maxDamagePlayer += (START_DAMAGE + 1);
+	m_MaxDamagePlayer += (START_DAMAGE + 1);
 }
 
 void Player::increaseArmorLevel(int amount)
 {
-	armorPlayer += amount;
+	m_ArmorPlayer += amount;
 
 	// But not beyond the maximum
-	if (armorPlayer > maxArmorPlayer)
+	if (m_ArmorPlayer > m_MaxArmorPlayer)
 	{
-		armorPlayer = maxArmorPlayer;
+		m_ArmorPlayer = m_MaxArmorPlayer;
 	}
 }
 
 void Player::increaseHealthLevel(int amount)
 {
-	healthPlayer += amount;
+	m_HealthPlayer += amount;
 
 	// But not beyond the maximum
-	if (healthPlayer > maxHealthPlayer)
+	if (m_HealthPlayer > m_MaxHealthPlayer)
 	{
-		healthPlayer = maxHealthPlayer;
+		m_HealthPlayer = m_MaxHealthPlayer;
 	}
 }
 
 void Player::increaseDamageAmount(int amount)
 {
-	damagePlayer += amount;
+	m_DamagePlayer += amount;
 
 	// But not beyond the maximum
-	if (damagePlayer > maxDamagePlayer)
+	if (m_DamagePlayer > m_MaxDamagePlayer)
 	{
-		damagePlayer = maxDamagePlayer;
+		m_DamagePlayer = m_MaxDamagePlayer;
 	}
 }
 
