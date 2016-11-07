@@ -45,8 +45,18 @@ bool Player::isAlive()
 
 Weapon Player::getWeapon(int index)
 {
-	if (index > weapons.size())
-	return weapons.at(index);
+	if (index > weapons.size()) {
+		return weapons.at(index);
+	}
+	else
+	{
+		return weapons.at(0);
+	}
+}
+
+int Player::getCurrentWeapons()
+{
+	return weapons.size();
 }
 
 void Player::resetPlayerStats()
@@ -155,4 +165,3 @@ void Player::increaseDamageAmount(int amount)
 		m_DamagePlayer = m_MaxDamagePlayer;
 	}
 }
-

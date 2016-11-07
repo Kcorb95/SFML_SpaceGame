@@ -21,7 +21,6 @@ private:
 	Sprite m_SpritePlayer;
 
 	// And a texture
-	// !!Watch this space!!
 	Texture m_TexturePlayer;
 
 	// What is the screen resolution
@@ -66,6 +65,8 @@ public:
 	Sprite getSprite();
 
 	Weapon getWeapon(int index);
+
+	int getCurrentWeapons();
 
 	// How much armor has the player currently got?
 	int getArmor();

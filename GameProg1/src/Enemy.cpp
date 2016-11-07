@@ -6,7 +6,6 @@
 
 using namespace std;
 
-
 void Enemy::spawn(int type)
 {
 

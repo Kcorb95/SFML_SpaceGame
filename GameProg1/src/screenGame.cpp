@@ -4,6 +4,7 @@
 #include "screenGame.hpp"
 #include "player.h"
 #include "enemy.h"
+#include "Action.h"
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
@@ -19,6 +20,7 @@ int screenGame::Run(RenderWindow &window)
 	Sprite spriteBackground;
 	Player player;
 	Enemy enemy;
+	Action action(player);
 	//TODO Make work with texture handler
 	if (!textureBackground.loadFromFile("graphics/backgroundLevelOne.png"))
 	{
@@ -68,7 +70,7 @@ int screenGame::Run(RenderWindow &window)
 	textEnemyHealth.setCharacterSize(40);
 	textEnemyHealth.setFillColor(Color::White);
 	textEnemyHealth.setPosition(resolution.x/1.2, resolution.y / 20);
-
+	
 	while (Running)
 	{
 		//Verifying events
@@ -162,6 +164,14 @@ int screenGame::Run(RenderWindow &window)
 			window.draw(textEnemyHealth);
 
 			window.setView(viewAction);
+			window.draw(action.m_Action);
+			window.draw(action.m_Attack);
+			for (int i = 0; i < sizeof(action.m_weapons); i++)
+			{
+				window.draw(action.m_weapons[i]);
+			}
+
+
 		}
 
 		window.display();
