@@ -161,6 +161,7 @@
     <ClInclude Include="src\screens.hpp" />
     <ClInclude Include="src\stdafx.h" />
     <ClInclude Include="src\targetver.h" />
+    <ClInclude Include="src\Weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Enemy.cpp" />
@@ -169,6 +170,7 @@
     <ClCompile Include="src\screenGame.cpp" />
     <ClCompile Include="src\screenMenu.cpp" />
     <ClCompile Include="src\stdafx.cpp" />
+    <ClCompile Include="src\Weapon.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

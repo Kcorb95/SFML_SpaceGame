@@ -29,7 +29,9 @@ int screenGame::Run(RenderWindow &window)
 
 	resolution.x = VideoMode::getDesktopMode().width;
 	resolution.y = VideoMode::getDesktopMode().height;
-	View hudView(FloatRect(0, 0, resolution.x, resolution.y));
+	View viewMain(FloatRect(0, 0, resolution.x, resolution.y));
+	View viewAction(FloatRect(0, 0, resolution.x/3, resolution.y));
+
 	
 	//Load font
 	Font font;
@@ -149,7 +151,8 @@ int screenGame::Run(RenderWindow &window)
 		{
 			//Clearing screen
 			window.clear();
-			//Drawing
+			window.setView(viewMain);
+			//Drawing main View
 			window.draw(spriteBackground);
 			window.draw(player.getSprite());
 			window.draw(enemy.getSprite());
@@ -157,6 +160,8 @@ int screenGame::Run(RenderWindow &window)
 			window.draw(textPlayerHealth);
 			window.draw(textEnemyArmor);
 			window.draw(textEnemyHealth);
+
+			window.setView(viewAction);
 		}
 
 		window.display();

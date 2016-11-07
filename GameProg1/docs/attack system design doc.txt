@@ -1,0 +1,14 @@
+Actions
+	A: attack
+		get list of weapons - default list --maybe hard limit on weapons
+		1.-0. weapons
+		Perform and go back to empty view or main action screen
+	E: evade
+		random chance to evade based on health and maybe some type of system
+	R: repair
+		attempt repair on ship -small chance to fail
+		small ammount repair, maybe influenced by item, or requires item
+	F: flee
+		attempt to run away
+		if failed, take damage
+		if success, boss still alive but reset. Can go back to try and buy repair etc
