@@ -20,7 +20,7 @@ public:
 	Text m_Attack;
 
 	//array of weapon names
-	Text m_weapons[4];
+	std::vector<sf::Text> m_TextWeapons;
 
 public:
 	Action(Player target);

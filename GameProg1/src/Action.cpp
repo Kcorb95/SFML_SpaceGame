@@ -17,22 +17,24 @@ Action::Action(Player target)
 	m_Action.setFont(font);
 	m_Action.setCharacterSize(25);
 	m_Action.setFillColor(Color::White);
-	m_Action.setPosition(resolution.x / 2, resolution.y / 2);
+	m_Action.setPosition(resolution.x / 3, resolution.y / 1.4);
 	m_Action.setString("Action:");
+
 	m_Attack.setFont(font);
-	m_Attack.setCharacterSize(25);
+	m_Attack.setCharacterSize(20);
 	m_Attack.setFillColor(Color::White);
-	m_Attack.setPosition(resolution.x / 3, resolution.y / 2);
+	m_Attack.setPosition(resolution.x / 2.6, resolution.y / 1.3);
 	m_Attack.setString("Attack");
 
-	
-	for (int i = 0; i < target.getCurrentWeapons(); i++)
+	int counter = 0;
+	for (auto &text : m_TextWeapons)
 	{
-		m_weapons[i].setFont(font);
-		m_weapons[i].setCharacterSize(25);
-		m_weapons[i].setFillColor(Color::White);
-		m_weapons[i].setPosition(resolution.x / 3 + (i*3), resolution.y / 2 + (i*3));
-		m_weapons[i].setString(target.getWeapon(i).getName());
+		text.setFont(font);
+		text.setCharacterSize(25);
+		text.setFillColor(Color::White);
+		text.setPosition(resolution.x / 2.f, resolution.y / 2.f + (counter));
+		text.setString(target.getWeapon(counter).getName());
+		counter++;
 	}
 }
 

@@ -44,7 +44,7 @@ bool Player::isAlive()
 
 Weapon Player::getWeapon(int index)
 {
-	if (index > weapons.size()) {
+	if (index < weapons.size()) {
 		return weapons.at(index);
 	}
 	else

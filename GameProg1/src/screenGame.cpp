@@ -20,7 +20,6 @@ int ScreenGame::Run(RenderWindow &window)
 	Sprite spriteBackground;
 	Player Player;
 	Enemy enemy;
-	Action action(Player);
 	//TODO Make work with texture handler
 	if (!textureBackground.loadFromFile("graphics/backgroundLevelOne.png"))
 	{
@@ -32,12 +31,14 @@ int ScreenGame::Run(RenderWindow &window)
 	resolution.x = VideoMode::getDesktopMode().width;
 	resolution.y = VideoMode::getDesktopMode().height;
 	View viewMain(FloatRect(0, 0, resolution.x, resolution.y));
-	View viewAction(FloatRect(0, 0, resolution.x, resolution.y));
 
-	
-	FloatRect actionRect;
-	//actionRect.
-
+	/* --debug to show HUD bounds
+	RectangleShape actionRect;
+	actionRect.setSize(Vector2f(resolution.x/1.8, resolution.y/4));
+	actionRect.setOrigin(Vector2f((resolution.x / 1.8) / 2, resolution.y / 4));
+	actionRect.setPosition(Vector2f(resolution.x/2,resolution.y));
+	actionRect.setFillColor(Color::Green);
+	*/
 	//Load font
 	Font font;
 	if (!font.loadFromFile("fonts/Gang Wolfik Craze.otf"))
@@ -74,6 +75,8 @@ int ScreenGame::Run(RenderWindow &window)
 	textEnemyHealth.setFillColor(Color::White);
 	textEnemyHealth.setPosition(resolution.x/1.2, resolution.y / 20);
 	
+	Action action(Player);
+
 	while (Running)
 	{
 		//Verifying events
@@ -166,18 +169,19 @@ int ScreenGame::Run(RenderWindow &window)
 			window.draw(textEnemyArmor);
 			window.draw(textEnemyHealth);
 
-			window.setView(viewAction);
 			window.draw(action.m_Action);
 			window.draw(action.m_Attack);
-			for (int i = 0; i < sizeof(action.m_weapons); i++)
+			//window.draw(actionRect); DEBUG FOR SHOWING HUDVIEW
+
+			for (auto& text : action.m_TextWeapons)
 			{
-				//window.draw(action.m_weapons[i]);
+				window.draw(text);
+				std::string string = text.getString();
+				std::cout << string << std::endl;
 			}
 		}
-
 		window.display();
 	}
-
 	//Never reaching this point normally, but just in case, exit the application
 	return -1;
 }
