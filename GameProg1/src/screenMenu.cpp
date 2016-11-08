@@ -1,5 +1,5 @@
 #include <iostream>
-#include "ScreenMenu.hpp"
+#include "ScreenMenu.h"
 
 #include <SFML/Graphics.hpp>
 

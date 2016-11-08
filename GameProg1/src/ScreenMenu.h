@@ -1,4 +1,4 @@
-#include "Screen.hpp"
+#include "Screen.h"
 
 using namespace sf;
 

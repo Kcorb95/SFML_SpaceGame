@@ -22,10 +22,10 @@
     <ClInclude Include="src\Action.h" />
     <ClInclude Include="src\Enemy.h" />
     <ClInclude Include="src\Player.h" />
-    <ClInclude Include="src\Screen.hpp" />
-    <ClInclude Include="src\ScreenGame.hpp" />
-    <ClInclude Include="src\ScreenMenu.hpp" />
-    <ClInclude Include="src\Screens.hpp" />
+    <ClInclude Include="src\Screen.h" />
+    <ClInclude Include="src\ScreenGame.h" />
+    <ClInclude Include="src\ScreenMenu.h" />
+    <ClInclude Include="src\ScreenReference.h" />
     <ClInclude Include="src\Weapon.h" />
   </ItemGroup>
   <ItemGroup>

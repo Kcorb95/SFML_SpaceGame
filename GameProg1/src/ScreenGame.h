@@ -1,5 +1,5 @@
 #pragma once
-#include "Screen.hpp"
+#include "Screen.h"
 #include <SFML/Graphics.hpp>
 
 using namespace sf;

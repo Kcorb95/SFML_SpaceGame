@@ -1,7 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include "ScreenGame.hpp"
+#include "ScreenGame.h"
 #include "Player.h"
 #include "Enemy.h"
 #include "Action.h"

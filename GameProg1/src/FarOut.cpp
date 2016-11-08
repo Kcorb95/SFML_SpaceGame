@@ -1,6 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "Screens.hpp"
+#include "ScreenReference.h"
 
 using namespace sf;
 
