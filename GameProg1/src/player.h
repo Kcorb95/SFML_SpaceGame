@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include "Weapon.h"
 
 using namespace sf;
@@ -53,7 +53,7 @@ public:
 
 	void spawn();
 
-	void recievePlayerDamage(int amount);//can maybe make this return bool for alive not alive state or even the int for the remaining health
+	void recieveDamage(int amount);//can maybe make this return bool for alive not alive state or even the int for the remaining health
 
 	// Where is the player
 	FloatRect getPosition();

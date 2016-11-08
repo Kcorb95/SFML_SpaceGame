@@ -1,6 +1,5 @@
 #include <iostream>
-#include "stdafx.h"
-#include "player.h"
+#include "Player.h"
 
 Player::Player()
 {
@@ -26,7 +25,7 @@ Player::Player()
 	m_SpritePlayer.setOrigin(139.5, 174);
 }
 
-void Player::recievePlayerDamage(int amount)
+void Player::recieveDamage(int amount)
 {
 	if (amount <= m_HealthPlayer)
 	{

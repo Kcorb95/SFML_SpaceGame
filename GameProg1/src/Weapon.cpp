@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Weapon.h"
 
 Weapon::Weapon(String weaponName, String damageType, int damageValue, int startingAmmo, int currentAmmo, int cooldownValue)

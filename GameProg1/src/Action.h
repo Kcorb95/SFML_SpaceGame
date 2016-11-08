@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
-#include <SFML\Graphics.hpp>
-#include "player.h"
-#include "enemy.h"
+#include <SFML/Graphics.hpp>
+#include "Player.h"
+#include "Enemy.h"
 #include "Weapon.h"
 
 using namespace sf;

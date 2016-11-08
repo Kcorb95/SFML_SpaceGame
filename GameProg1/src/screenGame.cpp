@@ -1,15 +1,15 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include "screenGame.hpp"
-#include "player.h"
-#include "enemy.h"
+#include "ScreenGame.hpp"
+#include "Player.h"
+#include "Enemy.h"
 #include "Action.h"
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
 
-int screenGame::Run(RenderWindow &window)
+int ScreenGame::Run(RenderWindow &window)
 {
 	// Start with the GAME_OVER state
 	State state = State::GAME_OVER;
@@ -18,9 +18,9 @@ int screenGame::Run(RenderWindow &window)
 	bool Running = true;
 	Texture textureBackground;
 	Sprite spriteBackground;
-	Player player;
+	Player Player;
 	Enemy enemy;
-	Action action(player);
+	Action action(Player);
 	//TODO Make work with texture handler
 	if (!textureBackground.loadFromFile("graphics/backgroundLevelOne.png"))
 	{
@@ -32,9 +32,12 @@ int screenGame::Run(RenderWindow &window)
 	resolution.x = VideoMode::getDesktopMode().width;
 	resolution.y = VideoMode::getDesktopMode().height;
 	View viewMain(FloatRect(0, 0, resolution.x, resolution.y));
-	View viewAction(FloatRect(0, 0, resolution.x/3, resolution.y));
+	View viewAction(FloatRect(0, 0, resolution.x, resolution.y));
 
 	
+	FloatRect actionRect;
+	//actionRect.
+
 	//Load font
 	Font font;
 	if (!font.loadFromFile("fonts/Gang Wolfik Craze.otf"))
@@ -100,7 +103,7 @@ int screenGame::Run(RenderWindow &window)
 				//round info
 
 				// Reset the player's stats
-				player.resetPlayerStats();
+				Player.resetPlayerStats();
 			}
 		}//End Event polling
 
@@ -112,7 +115,7 @@ int screenGame::Run(RenderWindow &window)
 
 		if (state == State::PLAYING)
 		{
-			player.spawn();
+			Player.spawn();
 			enemy.spawn(0);//spawn small enemy
 		}//end start setup
 		
@@ -129,8 +132,8 @@ int screenGame::Run(RenderWindow &window)
 			std::stringstream ssEnemyArmor;
 			std::stringstream ssEnemyHealth;
 
-			ssPlayerArmor << "Armor: " << player.getArmor();
-			ssPlayerHealth << "Health: " << player.getHealth();
+			ssPlayerArmor << "Armor: " << Player.getArmor();
+			ssPlayerHealth << "Health: " << Player.getHealth();
 			ssEnemyArmor << "Armor: " << enemy.getArmor();
 			ssEnemyHealth << "Health: " << enemy.getHealth();
 
@@ -139,7 +142,7 @@ int screenGame::Run(RenderWindow &window)
 			textEnemyArmor.setString(ssEnemyArmor.str());
 			textEnemyHealth.setString(ssEnemyHealth.str());
 
-			player.update();
+			Player.update();
 			enemy.update();
 		}//end update scene
 
@@ -156,7 +159,7 @@ int screenGame::Run(RenderWindow &window)
 			window.setView(viewMain);
 			//Drawing main View
 			window.draw(spriteBackground);
-			window.draw(player.getSprite());
+			window.draw(Player.getSprite());
 			window.draw(enemy.getSprite());
 			window.draw(textPlayerArmor);
 			window.draw(textPlayerHealth);
@@ -168,10 +171,8 @@ int screenGame::Run(RenderWindow &window)
 			window.draw(action.m_Attack);
 			for (int i = 0; i < sizeof(action.m_weapons); i++)
 			{
-				window.draw(action.m_weapons[i]);
+				//window.draw(action.m_weapons[i]);
 			}
-
-
 		}
 
 		window.display();

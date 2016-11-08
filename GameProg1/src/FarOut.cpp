@@ -1,17 +1,13 @@
-// Include important C++ libraries here
-#ifdef _MSC_VER
-#include "stdafx.h"
-#endif
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "screens.hpp"
+#include "Screens.hpp"
 
 using namespace sf;
 
 int main(int argc, char** argv)
 {
 	//Applications variables
-	std::vector<cScreen*> Screens;
+	std::vector<Screen*> Screens;
 	int screen = 0;
 
 	// Get the screen resolution and create an SFML window
@@ -22,9 +18,9 @@ int main(int argc, char** argv)
 	RenderWindow window(VideoMode(resolution.x, resolution.y), "FarOut", Style::Fullscreen);
 
 	//Screens preparations
-	screenMenu sM;
+	ScreenMenu sM;
 	Screens.push_back(&sM);
-	screenGame sG;
+	ScreenGame sG;
 	Screens.push_back(&sG);
 
 	//Main loop

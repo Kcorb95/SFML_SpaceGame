@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Enemy.h"
 #include <cstdlib>
 #include <ctime>

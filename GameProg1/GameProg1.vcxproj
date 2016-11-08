@@ -18,6 +18,25 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Action.h" />
+    <ClInclude Include="src\Enemy.h" />
+    <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\Screen.hpp" />
+    <ClInclude Include="src\ScreenGame.hpp" />
+    <ClInclude Include="src\ScreenMenu.hpp" />
+    <ClInclude Include="src\Screens.hpp" />
+    <ClInclude Include="src\Weapon.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Action.cpp" />
+    <ClCompile Include="src\Enemy.cpp" />
+    <ClCompile Include="src\FarOut.cpp" />
+    <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\ScreenGame.cpp" />
+    <ClCompile Include="src\ScreenMenu.cpp" />
+    <ClCompile Include="src\Weapon.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{d839bf83-03e2-4827-8902-9bfac08cfdb7}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -152,28 +171,6 @@
       <AdditionalLibraryDirectories>C:\SFML\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="src\Action.h" />
-    <ClInclude Include="src\cScreen.hpp" />
-    <ClInclude Include="src\Enemy.h" />
-    <ClInclude Include="src\player.h" />
-    <ClInclude Include="src\screenGame.hpp" />
-    <ClInclude Include="src\screenMenu.hpp" />
-    <ClInclude Include="src\screens.hpp" />
-    <ClInclude Include="src\stdafx.h" />
-    <ClInclude Include="src\targetver.h" />
-    <ClInclude Include="src\Weapon.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\Action.cpp" />
-    <ClCompile Include="src\Enemy.cpp" />
-    <ClCompile Include="src\FarOut.cpp" />
-    <ClCompile Include="src\player.cpp" />
-    <ClCompile Include="src\screenGame.cpp" />
-    <ClCompile Include="src\screenMenu.cpp" />
-    <ClCompile Include="src\stdafx.cpp" />
-    <ClCompile Include="src\Weapon.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

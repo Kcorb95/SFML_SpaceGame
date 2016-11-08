@@ -1,18 +1,18 @@
 #include <iostream>
-#include "screenMenu.hpp"
+#include "ScreenMenu.hpp"
 
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
 
-screenMenu::screenMenu(void)
+ScreenMenu::ScreenMenu(void)
 {
 	alpha_max = 3 * 255;
 	alpha_div = 3;
 	playing = false;
 }
 
-int screenMenu::Run(RenderWindow &window)
+int ScreenMenu::Run(RenderWindow &window)
 {
 	Event Event;
 	bool Running = true;

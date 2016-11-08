@@ -1,7 +1,6 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include "stdafx.h"
 #include "Action.h"
 
 Action::Action(Player target)
@@ -26,21 +25,20 @@ Action::Action(Player target)
 	m_Attack.setPosition(resolution.x / 3, resolution.y / 2);
 	m_Attack.setString("Attack");
 
-	/*
-	for (int i = 0; i < target.getCurrentWeapons; i++)
+	
+	for (int i = 0; i < target.getCurrentWeapons(); i++)
 	{
 		m_weapons[i].setFont(font);
 		m_weapons[i].setCharacterSize(25);
 		m_weapons[i].setFillColor(Color::White);
-		m_weapons[i].setPosition(resolution.x / 3 + 300, resolution.y / 2 + 300);
-		m_weapons[i].setString(target.getWeapon(i).getName);
+		m_weapons[i].setPosition(resolution.x / 3 + (i*3), resolution.y / 2 + (i*3));
+		m_weapons[i].setString(target.getWeapon(i).getName());
 	}
-	*/
 }
 
 void Action::Attack(Player target, Weapon weapon)
 {
-	target.recievePlayerDamage(weapon.getDamageValue());
+	target.recieveDamage(weapon.getDamageValue());
 }
 
 void Action::Attack(Enemy target, Weapon weapon)
