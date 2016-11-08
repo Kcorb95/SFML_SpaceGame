@@ -25,7 +25,7 @@ public:
 public:
 	Action(Player target);
 
-	void Action::Attack(Player target, Weapon weapon);
+	void Attack(Player target, Weapon weapon);
 
-	void Action::Attack(Enemy target, Weapon weapon);
+	void Attack(Enemy target, Weapon weapon);
 };

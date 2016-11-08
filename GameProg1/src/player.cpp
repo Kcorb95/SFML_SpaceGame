@@ -26,7 +26,7 @@ Player::Player()
 	m_SpritePlayer.setOrigin(139.5, 174);
 }
 
-void Player::recieveDamage(int amount)
+void Player::recievePlayerDamage(int amount)
 {
 	if (amount <= m_HealthPlayer)
 	{
@@ -110,11 +110,6 @@ int Player::getHealth()
 	return m_HealthPlayer;
 }
 
-int Player::getDamage()
-{
-	return m_DamagePlayer;
-}
-
 void Player::upgradeArmor()
 {
 	// Increase max Armor by 10 points
@@ -125,12 +120,6 @@ void Player::upgradeHealth()
 {
 	// Increase max Health by 10 points
 	m_MaxHealthPlayer += (START_HEALTH + 10);
-}
-
-void Player::upgradeDamage()
-{
-	// Increase damage per attack by 1
-	m_MaxDamagePlayer += (START_DAMAGE + 1);
 }
 
 void Player::increaseArmorLevel(int amount)

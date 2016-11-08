@@ -28,7 +28,7 @@ private:
 	bool m_IsReady;
 
 public:
-	Weapon::Weapon(String weaponName, String damageType, int damageValue, int startingAmmo, int currentAmmo, int cooldownValue);
+	Weapon(String weaponName, String damageType, int damageValue, int startingAmmo, int currentAmmo, int cooldownValue);
 
 	String getName();
 

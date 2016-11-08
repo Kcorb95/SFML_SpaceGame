@@ -61,14 +61,7 @@ void Enemy::spawn(int type)
 
 void Enemy::recieveDamage(int amount)
 {
-	if (amount <= m_HealthEnemy)
-	{
-		m_HealthEnemy -= amount;
-	}
-	else
-	{
-		m_IsAlive = false;
-	}
+	m_HealthEnemy -= amount;
 }
 
 bool Enemy::isAlive()

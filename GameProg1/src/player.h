@@ -53,7 +53,7 @@ public:
 
 	void spawn();
 
-	void recieveDamage(int amount);
+	void recievePlayerDamage(int amount);//can maybe make this return bool for alive not alive state or even the int for the remaining health
 
 	// Where is the player
 	FloatRect getPosition();
@@ -74,9 +74,6 @@ public:
 	// How much health has the player currently got?
 	int getHealth();
 
-	// How much damage can the player do per attack?
-	int getDamage();
-
 	//Called once every frame to update player
 	void update();
 
@@ -85,9 +82,6 @@ public:
 
 	// Give the player some health
 	void upgradeHealth();
-
-	// Allow player to deal more damage
-	void upgradeDamage();
 
 	// Increase the maximum amount of armor the player can have
 	void increaseArmorLevel(int amount);
