@@ -176,8 +176,6 @@ int ScreenGame::Run(RenderWindow &window)
 			for (auto& text : action.m_TextWeapons)
 			{
 				window.draw(text);
-				std::string string = text.getString();
-				std::cout << string << std::endl;
 			}
 		}
 		window.display();

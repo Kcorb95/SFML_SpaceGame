@@ -41,10 +41,10 @@ private:
 	//What is the maximum amount of damage a player can do
 	int m_MaxDamagePlayer;
 
-	std::vector<Weapon> weapons;
-
 public:
 	Player();
+
+	std::vector<Weapon> m_Weapons;
 
 	bool isAlive();
 

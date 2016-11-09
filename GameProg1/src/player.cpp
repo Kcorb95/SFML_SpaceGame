@@ -11,8 +11,8 @@ Player::Player()
 	Weapon basicRail = Weapon("Basic Railgun", "Kinetic", 5, 50, 50, 0);
 	Weapon basicMissile = Weapon("Basic Missile Launcher", "Ballistic", 10, 5, 5, 2);
 
-	weapons.push_back(basicRail);
-	weapons.push_back(basicMissile);
+	m_Weapons.push_back(basicRail);
+	m_Weapons.push_back(basicMissile);
 
 	//Associate a texture with our player sprite
 	if (!m_TexturePlayer.loadFromFile("graphics/shipThree.png"))
@@ -44,18 +44,21 @@ bool Player::isAlive()
 
 Weapon Player::getWeapon(int index)
 {
+	return m_Weapons.at(index);
+	/*
 	if (index < weapons.size()) {
-		return weapons.at(index);
+		
 	}
 	else
 	{
 		return weapons.at(0);
 	}
+	*/
 }
 
 int Player::getCurrentWeapons()
 {
-	return weapons.size();
+	return m_Weapons.size();
 }
 
 void Player::resetPlayerStats()
