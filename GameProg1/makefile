@@ -2,21 +2,15 @@ CXX = g++
 CXXFLAGS = -std=c++14
 CXXLIBS = -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-system
 
-##all: Timber TimerLowres
-all: Timber
+all: GameProg1 GameProg1
 
-Timber: code/Timber.o
-		$(CXX) $< -o $@ $(CXXLIBS)
+GameProg1: src/Action.o src/Enemy.o src/FarOut.o \
+			 src/Player.o src/ScreenGame.o src/ScreenMenu.o src/Weapon.o
+	$(CXX) -O3 $? -o $@ $(CXXLIBS)
 
-##TimberLowres: lowres/Timber.o
-##		$(CXX) $< -o $@ $(CXXLIBS)
+src/%.o: %.cpp %.h
+	$(CXX) $< -o $@
 
-code/%.o: %.cpp
-		$(CXX) $< -o $@
-		
-##lowres/%.o: %.cpp
-##		$(CXX) $< -o $@
-		
 clean:
-##		rm Timber TimberLowres code/*.o lowres/*.o
-		rm Timber code/*.o
+	rm GameProg1 src/*.o
+

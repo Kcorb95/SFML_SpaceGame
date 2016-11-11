@@ -26,9 +26,6 @@ Action::Action(Player target)
 	m_Attack.setPosition(resolution.x / 2.6, resolution.y / 1.3);
 	m_Attack.setString("Attack");
 
-	// TODO loop over the player's list of weapons and populate the textweapons list
-
-	int counter = 0;
 	for (int i = 0; i < target.m_Weapons.size(); i++)
 	{
 		std::cerr << "initializing weapon names" << std::endl;
@@ -36,7 +33,7 @@ Action::Action(Player target)
 		weapontext.setFont(font);
 		weapontext.setCharacterSize(25);
 		weapontext.setFillColor(Color::White);
-		weapontext.setPosition(resolution.x / 2.f, resolution.y / 2.f + (counter * 100));
+		weapontext.setPosition(resolution.x / 2.4f, resolution.y / 1.2f + (i * 50));
 		weapontext.setString(target.getWeapon(i).getName());
 		m_TextWeapons.push_back(weapontext);
 

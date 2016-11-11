@@ -20,6 +20,8 @@ int ScreenGame::Run(RenderWindow &window)
 	Sprite spriteBackground;
 	Player Player;
 	Enemy enemy;
+	int attackSelection;
+	int actionSelection;
 	//TODO Make work with texture handler
 	if (!textureBackground.loadFromFile("graphics/backgroundLevelOne.png"))
 	{
@@ -31,6 +33,8 @@ int ScreenGame::Run(RenderWindow &window)
 	resolution.x = VideoMode::getDesktopMode().width;
 	resolution.y = VideoMode::getDesktopMode().height;
 	View viewMain(FloatRect(0, 0, resolution.x, resolution.y));
+	View viewHud(FloatRect(0, 0, resolution.x, resolution.y));
+
 
 	/* --debug to show HUD bounds
 	RectangleShape actionRect;
@@ -110,10 +114,42 @@ int ScreenGame::Run(RenderWindow &window)
 			}
 		}//End Event polling
 
-		//Handle controls while playing
+		//Handle Controls while playing
 		if (state == State::PLAYING)
 		{
+			if (Keyboard::isKeyPressed(Keyboard::Return))
+			{
+				state = State::ATTACK;
+			}
+		}//end playing controls
 
+		//Handle controls while Attacking
+		if (state == State::ATTACK)
+		{
+			if (Keyboard::isKeyPressed(Keyboard::Down))
+			{
+				if (attackSelection == 0) 
+				{
+					attackSelection = action.m_TextWeapons.size();
+				}
+				else
+				{
+					attackSelection--;
+				}
+			}
+		
+
+			if (Keyboard::isKeyPressed(Keyboard::Up))
+			{
+				if (attackSelection == action.m_TextWeapons.size())
+				{
+					attackSelection = 0;
+				}
+				else
+				{
+					attackSelection++;
+				}
+			}
 		}//end controls handling
 
 		if (state == State::PLAYING)
@@ -158,8 +194,8 @@ int ScreenGame::Run(RenderWindow &window)
 		if (state == State::PLAYING)
 		{
 			//Clearing screen
-			window.clear();
 			window.setView(viewMain);
+			window.clear();
 			//Drawing main View
 			window.draw(spriteBackground);
 			window.draw(Player.getSprite());
@@ -170,14 +206,27 @@ int ScreenGame::Run(RenderWindow &window)
 			window.draw(textEnemyHealth);
 
 			window.draw(action.m_Action);
+
+			window.setView(viewHud);
 			window.draw(action.m_Attack);
 			//window.draw(actionRect); DEBUG FOR SHOWING HUDVIEW
+		}
 
+		if (state == State::ATTACK)
+		{
+			window.setView(viewHud);
+			for (int i = 0; i < action.m_TextWeapons.size(); i++)
+			{
+				action.m_TextWeapons.at(i).setFillColor(Color(255, 255, 255, 255));
+			}
+			//action.m_TextWeapons.at(attackSelection).setFillColor(Color(255, 0, 0, 255));
+			//Draw all weapons currently owned by player
 			for (auto& text : action.m_TextWeapons)
 			{
 				window.draw(text);
 			}
 		}
+
 		window.display();
 	}
 	//Never reaching this point normally, but just in case, exit the application

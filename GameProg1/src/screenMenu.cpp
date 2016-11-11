@@ -7,8 +7,6 @@ using namespace sf;
 
 ScreenMenu::ScreenMenu(void)
 {
-	alpha_max = 3 * 255;
-	alpha_div = 3;
 	playing = false;
 }
 
@@ -51,11 +49,6 @@ int ScreenMenu::Run(RenderWindow &window)
 	optionContinue.setString("Continue");
 	optionContinue.setPosition({ VideoMode::getDesktopMode().width / 2.2f, VideoMode::getDesktopMode().height / 3.0f });
 
-	if (playing)
-	{
-		alpha = alpha_max;
-	}
-
 	while (Running)
 	{
 		//Verifying events
@@ -96,11 +89,6 @@ int ScreenMenu::Run(RenderWindow &window)
 			}
 		}
 		//When getting at alpha_max, we stop modifying the sprite
-		if (alpha<alpha_max)
-		{
-			alpha++;
-		}
-		spriteBackground.setColor(Color(255, 255, 255, alpha / alpha_div));
 		if (menu == 0)
 		{
 			optionPlay.setFillColor(Color(255, 0, 0, 255));
@@ -118,8 +106,6 @@ int ScreenMenu::Run(RenderWindow &window)
 		window.clear();
 		//Drawing
 		window.draw(spriteBackground);
-		if (alpha == alpha_max)
-		{
 			if (playing)
 			{
 				window.draw(optionContinue);
@@ -129,7 +115,6 @@ int ScreenMenu::Run(RenderWindow &window)
 				window.draw(optionPlay);
 			}
 			window.draw(optionExit);
-		}
 		window.display();
 	}
 

@@ -5,7 +5,7 @@
 using namespace sf;
 
 // The game will always be in one of these states
-enum class State { GAME_OVER, PLAYING };
+enum class State { GAME_OVER, PLAYING, ACTION, ATTACK };
 
 class ScreenGame : public Screen
 {
