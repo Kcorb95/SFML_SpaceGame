@@ -51,7 +51,7 @@ public:
 	// Call this at the end of every game
 	void resetPlayerStats();
 
-	void spawn();
+	void spawn(Vector2f position);
 
 	void recieveDamage(int amount);//can maybe make this return bool for alive not alive state or even the int for the remaining health
 

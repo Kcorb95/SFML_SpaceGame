@@ -1,0 +1,42 @@
+#pragma once
+
+#include <SFML/Graphics.hpp>
+#include <stack>
+
+#include "TextureManager.h"
+#include "GUI.h"
+#include "Player.h"
+#include "Enemy.h"
+
+class State;
+
+class Game
+{
+private:
+	void loadTextures();
+	void loadStyleSheets();
+	void loadFonts();
+
+public:
+	std::stack<State*> m_States;
+
+	sf::RenderWindow m_Window;
+	TextureManager m_TextureManager;
+	sf::Sprite m_Background;
+
+	Player m_Player;
+	Enemy m_Enemy;
+
+	std::map<std::string, GUIStyle> m_StyleSheets;
+	std::map<std::string, sf::Font> m_Fonts;
+
+	void pushState(State* state);
+	void popState();
+	void changeState(State* state);
+	State* peekState();
+
+	void gameLoop();
+
+	Game();
+	~Game();
+};

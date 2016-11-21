@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void Enemy::spawn(int type)
+void Enemy::spawn(int type, Vector2f position)
 {
 
 	switch (type)
@@ -50,10 +50,11 @@ void Enemy::spawn(int type)
 		break;
 	}
 
-	m_PositionEnemy.x = VideoMode::getDesktopMode().width / 1.135;
-	m_PositionEnemy.y = VideoMode::getDesktopMode().height / 2;
+	m_PositionEnemy.x = position.x;
+	m_PositionEnemy.y = position.y;
 
-	m_SpriteEnemy.setOrigin(139.5, 174);
+	m_SpriteEnemy.setOrigin(0, m_TextureEnemy.getSize().y * 0.5f);
+
 	m_SpriteEnemy.setRotation(180);
 	m_SpriteEnemy.setPosition(m_PositionEnemy);
 }

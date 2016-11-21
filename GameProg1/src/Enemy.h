@@ -34,7 +34,7 @@ public:
 	bool isAlive();
 
 	// Spawn a new zombie
-	void spawn(int type);
+	void spawn(int type, Vector2f position);
 
 	// Return a rectangle that is the position in the world
 	FloatRect getPosition();

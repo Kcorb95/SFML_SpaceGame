@@ -22,7 +22,7 @@ Player::Player()
 	m_SpritePlayer.setTexture(m_TexturePlayer);
 
 	//Set the origin of the sprite to the center
-	m_SpritePlayer.setOrigin(139.5, 174);
+	m_SpritePlayer.setOrigin(0, m_TexturePlayer.getSize().y * 0.5f);
 }
 
 void Player::recieveDamage(int amount)
@@ -44,16 +44,10 @@ bool Player::isAlive()
 
 Weapon Player::getWeapon(int index)
 {
-	return m_Weapons.at(index);
-	/*
-	if (index < weapons.size()) {
-		
-	}
+	if (index < m_Weapons.size())
+		return m_Weapons.at(index);
 	else
-	{
-		return weapons.at(0);
-	}
-	*/
+		return m_Weapons.at(0);
 }
 
 int Player::getCurrentWeapons()
@@ -71,15 +65,15 @@ void Player::resetPlayerStats()
 	m_MaxDamagePlayer = START_DAMAGE;
 }
 
-void Player::spawn()
+void Player::spawn(Vector2f position)
 {
 	//Place the player in the middle of the screen on the left side
-	m_PositionPlayer.x = VideoMode::getDesktopMode().width / 7;
-	m_PositionPlayer.y = VideoMode::getDesktopMode().height / 2;
+	m_PositionPlayer.x = position.x;
+	m_PositionPlayer.y = position.y;
 
-	// Strore the resolution for future use
-	m_Resolution.x = VideoMode::getDesktopMode().width;
-	m_Resolution.y = VideoMode::getDesktopMode().height;
+	// Store the resolution for future use
+	m_Resolution.x = position.x;
+	m_Resolution.y = position.y;
 }
 
 FloatRect Player::getPosition()
