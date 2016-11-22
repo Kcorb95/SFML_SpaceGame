@@ -22,7 +22,7 @@ public:
 	sf::Sprite m_Sprite;
 
 	//Allows different looking versions of the same ship
-	int shipVariant;
+	int shipVariant = 0;
 
 	Ship() {}
 
@@ -56,4 +56,8 @@ public:
 	int getMaxHealth();
 
 	Weapon getWeapon(int index);
+
+	void setPosition(Vector2f position);
+
+	void setRotation(int degrees);
 };

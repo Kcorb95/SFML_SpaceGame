@@ -53,3 +53,13 @@ Weapon Ship::getWeapon(int index)
 	else
 		return m_Weapons.at(0);
 }
+
+void Ship::setPosition(Vector2f position)
+{
+	this->m_Sprite.setPosition(position);
+}
+
+void Ship::setRotation(int degrees)
+{
+	this->m_Sprite.setRotation(degrees);
+}

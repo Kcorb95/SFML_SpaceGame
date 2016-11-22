@@ -2,7 +2,6 @@
 
 #include "State.h"
 #include "StateGame.h"
-#include "FarOut.h"
 #include "StateMenu.h"
 
 void StateGame::draw(const float dt)
@@ -14,8 +13,10 @@ void StateGame::draw(const float dt)
 
 	this->m_Game->m_Window.setView(this->m_GameView);
 
-	this->m_Game->m_Window.draw(this->m_Game->m_Player.getSprite());
-	this->m_Game->m_Window.draw(this->m_Game->m_Enemy.getSprite());
+	//this->m_Game->m_Window.draw(this->m_Game->m_Player.getSprite());
+	//this->m_Game->m_Window.draw(this->m_Game->m_Enemy.getSprite());
+	this->m_Game->m_PlayerShip.draw(this->m_Game->m_Window, dt);
+	this->m_Game->m_EnemyShip.draw(this->m_Game->m_Window, dt);
 
 	this->m_Game->m_Window.setView(this->m_GUIView);
 	for (auto gui : this->m_GUISystem)
@@ -28,6 +29,7 @@ void StateGame::update(const float dt)
 {
 	//update for the guisystem
 	//update ammo etc
+	this->m_Game->m_PlayerShip.update();
 	this->m_Game->m_Player.update();
 	this->m_Game->m_Enemy.update();
 	return;
