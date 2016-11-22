@@ -31,7 +31,7 @@ private:
 	std::vector<Animation> m_Animations;
 
 	//Current time since the animation loop began
-	float m_t;
+	float t;
 
 	int m_CurrentAnim;
 
@@ -54,14 +54,14 @@ public:
 	//Constructor
 	AnimationHandler()
 	{
-		this->m_t = 0.0f;
+		this->t = 0.0f;
 		this->m_CurrentAnim = -1;
 	}
 	AnimationHandler(const sf::IntRect& framesize)
 	{
 		this->m_FrameSize = framesize;
 
-		this->m_t = 0.0f;
+		this->t = 0.0f;
 		this->m_CurrentAnim = -1;
 	}
 };

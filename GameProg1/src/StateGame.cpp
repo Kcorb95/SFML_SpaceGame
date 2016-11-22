@@ -184,12 +184,12 @@ StateGame::StateGame(Game* game)
 	}));
 
 	//Draw Player HUD
-	this->m_GUISystem.at("playerHud").setOrigin(0,0);
+	this->m_GUISystem.at("playerHud").setOrigin(0, 0);
 	this->m_GUISystem.at("playerHud").setPosition(15, 10);
 	this->m_GUISystem.at("playerHud").show();
 	//Draw Enemy HUD
 	this->m_GUISystem.at("enemyHud").setOrigin(this->m_GUISystem.at("enemyHud").getSize().x, 0);
-	this->m_GUISystem.at("enemyHud").setPosition(sf::Vector2f(this->m_Game->m_Window.getSize().x - 15,10));
+	this->m_GUISystem.at("enemyHud").setPosition(sf::Vector2f(this->m_Game->m_Window.getSize().x - 15, 10));
 	this->m_GUISystem.at("enemyHud").show();
 
 	//set origin of this menu to the center bottom of the GUI

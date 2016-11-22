@@ -10,10 +10,10 @@ void AnimationHandler::update(const float dt)
 	float duration = this->m_Animations[m_CurrentAnim].m_Duration;
 
 	//Check if the animation has progressed to a new frame and if so change to the next frame
-	if (int((m_t + dt) / duration) > int(m_t / duration))
+	if (int((t + dt) / duration) > int(t / duration))
 	{
 		//Calculate the frame num
-		int frame = int((m_t + dt) / duration);
+		int frame = int((t + dt) / duration);
 
 		//Adjust for looping
 		frame %= this->m_Animations[m_CurrentAnim].getLength();
@@ -26,11 +26,11 @@ void AnimationHandler::update(const float dt)
 	}
 
 	//Increment the time elapsed
-	this->m_t += dt;
+	this->t += dt;
 	//Adjust for lopping
-	if (this->m_t > duration * this->m_Animations[m_CurrentAnim].getLength())
+	if (this->t > duration * this->m_Animations[m_CurrentAnim].getLength())
 	{
-		this->m_t = 0.0f;
+		this->t = 0.0f;
 	}
 	return;
 }
@@ -53,6 +53,6 @@ void AnimationHandler::changeAnim(unsigned int animationID)
 	sf::IntRect rect = this->m_FrameSize;
 	rect.top = rect.height * animationID;
 	this->m_Bounds = rect;
-	this->m_t = 0.0;
+	this->t = 0.0;
 	return;
 }
