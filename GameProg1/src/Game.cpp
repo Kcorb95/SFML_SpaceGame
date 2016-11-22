@@ -56,8 +56,8 @@ void Game::gameLoop()
 
 void Game::loadTextures()
 {
-	m_TextureManager.loadTexture("player", "graphics/shipThree.png");
-	m_TextureManager.loadTexture("enemy", "graphics/shipThree.png");
+	m_TextureManager.loadTexture("player", "graphics/shipFourSheet.png");
+	m_TextureManager.loadTexture("enemy", "graphics/shipFourSheet.png");
 
 	m_TextureManager.loadTexture("background", "graphics/background.png");
 }
@@ -89,11 +89,27 @@ void Game::loadStyleSheets()
 	return;
 }
 
+void Game::loadShips()//This will allow us to create all of the ships for the game and then draw them when needed
+{
+	/*Player Ship*/
+	this->m_PlayerShip = Ship(100, 100,//Health/Armor
+	{ Weapon("Basic Railgun", "Kinetic", 5, 50, 50, 0), Weapon("Basic Missile Launcher", "Ballistic", 10, 5, 5, 2) }, //Weapons
+		Vector2f(150, 174), m_TextureManager.getRef("player"),//Dimensions and Texture
+		{ Animation(0, 3, 0.5f), Animation(0, 3, 0.5f),Animation(0, 3, 0.5f) });//Animations
+
+	/*Starter Enemy Ship*/
+	this->m_EnemyShip = Ship(150, 150,//Health/Armor
+	{ Weapon("Medium Railgun", "Kinetic", 8, 50, 50, 0), Weapon("Light Missile Launcher", "Ballistic", 3, 5, 5, 1) }, //Weapons
+		Vector2f(150, 174), m_TextureManager.getRef("enemy"),//Dimensions and Texture
+		{ Animation(0, 3, 0.5f), Animation(0, 3, 0.5f),Animation(0, 3, 0.5f) });//Animations
+}
+
 Game::Game()
 {
 	this->loadTextures();
 	this->loadFonts();
 	this->loadStyleSheets();
+	this->loadShips();
 
 	this->m_Window.create(sf::VideoMode(1000, 800), "FarOut");
 	this->m_Window.setFramerateLimit(60);

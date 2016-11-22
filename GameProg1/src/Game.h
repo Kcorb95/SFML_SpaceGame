@@ -7,6 +7,7 @@
 #include "GUI.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "Ship.h"
 
 class State;
 
@@ -16,6 +17,7 @@ private:
 	void loadTextures();
 	void loadStyleSheets();
 	void loadFonts();
+	void loadShips();
 
 public:
 	std::stack<State*> m_States;
@@ -26,6 +28,9 @@ public:
 
 	Player m_Player;
 	Enemy m_Enemy;
+
+	Ship m_PlayerShip;
+	Ship m_EnemyShip;
 
 	std::map<std::string, GUIStyle> m_StyleSheets;
 	std::map<std::string, sf::Font> m_Fonts;
