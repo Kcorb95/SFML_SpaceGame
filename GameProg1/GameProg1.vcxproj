@@ -40,6 +40,20 @@
     <ClCompile Include="src\TextureManager.cpp" />
     <ClCompile Include="src\Weapon.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="graphics\background.png" />
+    <Image Include="graphics\backgroundMenu.png" />
+    <Image Include="graphics\shipFour.png" />
+    <Image Include="graphics\shipFourSheet.png" />
+    <Image Include="graphics\shipOne.png" />
+    <Image Include="graphics\shipThree.png" />
+    <Image Include="graphics\shipTwo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="fonts\Game Robot.ttf" />
+    <Font Include="fonts\game_sans_serif_7.ttf" />
+    <Font Include="fonts\Gang Wolfik Craze.otf" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{d839bf83-03e2-4827-8902-9bfac08cfdb7}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

@@ -94,19 +94,18 @@ void Game::loadShips()//This will allow us to create all of the ships for the ga
 	/*Player Ship*/
 	this->m_PlayerShip = Ship(100, 100,//Structure/Armor
 	{ Weapon("Basic Railgun", "Kinetic", 5, 50, 0), Weapon("Basic Missile Launcher", "Ballistic", 10, 5, 2) }, //Weapons
-		Vector2f(150, 174), m_TextureManager.getRef("player"),//Dimensions and Texture
+		sf::Vector2f(150, 174), m_TextureManager.getRef("player"),//Dimensions and Texture
 		{ Animation(0, 2, 0.3f), Animation(0, 2, 0.1f),Animation(0, 2, 0.3f) });//Animations
 
-	this->m_PlayerShip.setPosition(Vector2f(25,400));//hard coded for now, possibly make resolution a variable
+	this->m_PlayerShip.setPosition(sf::Vector2f(25, 400));//hard coded for now, possibly make resolution a variable
 
 	/*Starter Enemy Ship*/
 	this->m_EnemyShip = Ship(150, 150,//Structure/Armor
 	{ Weapon("Medium Railgun", "Kinetic", 8, 50, 0), Weapon("Light Missile Launcher", "Ballistic", 10, 5, 1) }, //Weapons
-		Vector2f(150, 174), m_TextureManager.getRef("enemy"),//Dimensions and Texture
+		sf::Vector2f(150, 174), m_TextureManager.getRef("enemy"),//Dimensions and Texture
 		{ Animation(0, 2, 0.3f), Animation(0, 2, 0.1f),Animation(0, 2, 0.3f) });//Animations
-
 	this->m_EnemyShip.setRotation(180);
-	this->m_EnemyShip.setPosition(Vector2f(975, 400));
+	this->m_EnemyShip.setPosition(sf::Vector2f(975, 400));
 }
 
 Game::Game()

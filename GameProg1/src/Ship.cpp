@@ -53,7 +53,7 @@ Weapon Ship::getWeapon(int index)
 		return this->m_Weapons.at(0);
 }
 
-void Ship::setPosition(Vector2f position)
+void Ship::setPosition(sf::Vector2f position)
 {
 	this->m_Sprite.setPosition(position);
 }
@@ -73,7 +73,7 @@ void Ship::repair(int amount, int type)
 
 void Ship::damage(Weapon weapon)
 {
-	String damageType = weapon.getDamageType();
+	std::string damageType = weapon.getDamageType();
 	if (damageType == "Kinetic")
 		damage(weapon.getDamageValue(), 1);
 	else if (damageType == "Ballistic")

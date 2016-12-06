@@ -1,8 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-using namespace sf;
-
 class Weapon
 {
 private:
@@ -23,14 +21,23 @@ private:
 
 	//Weapon cool down time (in turns)
 	int m_CooldownValue;
-	
+
 	//is weapon on cool down?
 	bool m_IsReady;
 
 public:
-	Weapon(){}
+	Weapon() {}
 
-	Weapon(std::string weaponName, std::string damageType, const unsigned int damageValue, const unsigned int maxAmmo, const unsigned int cooldownValue);
+	Weapon(const std::string weaponName, const std::string damageType, const unsigned int damageValue, const unsigned int maxAmmo, const unsigned int cooldownValue)
+	{
+		this->m_Name = weaponName;
+		this->m_DamageType = damageType;
+		this->m_DamageValue = damageValue;
+		this->m_MaxAmmo = maxAmmo;
+		this->m_CurrentAmmo = maxAmmo;
+		this->m_CooldownValue = cooldownValue;
+		this->m_IsReady = true;
+	}
 
 	std::string getName();
 
@@ -43,6 +50,8 @@ public:
 	int getCurrentAmmo();
 
 	void decreaseAmmo();
+
+	void increaseAmmo(int amount);
 
 	bool isReady();
 };

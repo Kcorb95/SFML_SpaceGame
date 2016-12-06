@@ -29,7 +29,7 @@ public:
 	Ship() {}
 
 	Ship(const unsigned int maxArmor, const unsigned int maxStructure, const std::vector<Weapon>& weapons,
-		const Vector2f shipDimensions, const sf::Texture& texture, const std::vector<Animation>& animations)
+		const sf::Vector2f shipDimensions, const sf::Texture& texture, const std::vector<Animation>& animations)
 	{
 		this->m_Armor = maxArmor;
 		this->m_MaxArmor = maxArmor;
@@ -62,7 +62,7 @@ public:
 
 	Weapon getWeapon(int index);
 
-	void setPosition(Vector2f position);
+	void setPosition(sf::Vector2f position);
 
 	void setRotation(int degrees);
 
@@ -73,6 +73,6 @@ public:
 	void damage(int amount, int location);
 
 	void damageArmor(int amount);
-	
+
 	void damageStructure(int amount);
 };
