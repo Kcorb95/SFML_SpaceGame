@@ -35,15 +35,14 @@ int Ship::getMaxArmor()
 	return this->m_MaxArmor;
 }
 
-
-int Ship::getCurrentHealth()
+int Ship::getCurrentStructure()
 {
-	return this->m_Health;
+	return this->m_Structure;
 }
 
-int Ship::getMaxHealth()
+int Ship::getMaxStructure()
 {
-	return this->m_MaxHealth;
+	return this->m_MaxStructure;
 }
 
 Weapon Ship::getWeapon(int index)
@@ -62,4 +61,78 @@ void Ship::setPosition(Vector2f position)
 void Ship::setRotation(int degrees)
 {
 	this->m_Sprite.setRotation(degrees);
+}
+
+void Ship::repair(int amount, int type)
+{
+	if (type == 2)
+		m_Structure += amount;
+	else
+		m_Armor += amount;
+}
+
+void Ship::damage(Weapon weapon)
+{
+	String damageType = weapon.getDamageType();
+	if (damageType == "Kinetic")
+		damage(weapon.getDamageValue(), 1);
+	else if (damageType == "Ballistic")
+		damage(weapon.getDamageValue(), 2);
+}
+
+/*0 For Shield
+ *1 For Armor
+ *2 For Structure
+ */
+void Ship::damage(int amount, int location)
+{
+	switch (location)
+	{
+	case 1://Kinetic good against Armor, bad against else
+		damageArmor(amount);
+		break;
+	case 2://Ballistic good against Structure, bad against else
+		if (m_Armor == 0)//if there is no Armor
+			damageStructure(amount); //damage structure for normal amount
+		else//then there is Armor
+		{
+			if ((amount / 2) > m_Armor)//If I will do more reduced damage than there is remaining armor
+			{
+				amount /= 2;// set the amount to half
+				amount -= m_Armor;//"deal" the damage
+				m_Armor = 0; //"deal" the damage
+				damageStructure(amount * 2);//deal the remaining normal damage to structure
+			}
+			else
+				damageArmor(amount / 2);//deal reduced damage to Armor
+		}
+		break;
+	}
+}
+
+void Ship::damageArmor(int amount)
+{
+	if (m_Armor == 0)//If no remaining Armor
+		m_Structure -= (amount / 2);//Deal reduced damage to structure
+	else if (amount > m_Armor)//if you deal more damage than there is remaining armor
+	{
+		amount -= m_Armor;//reduce the amount of damage by the remaining armor
+		m_Armor = 0;//set armor to zero since you just "dealt" that damage
+		m_Structure -= (amount / 2);//deal the reduced remaining damage
+	}
+	else//damage Armor for normal amount
+		m_Armor -= amount;
+}
+
+void Ship::damageStructure(int amount)
+{
+	if (amount < m_Structure)//if the amount of damage to be dealt *wont* kill the target
+	{
+		m_Structure -= amount;
+	}
+	else //target is totally dead
+	{
+		isAlive = false;
+		m_Structure = 0;
+	}
 }

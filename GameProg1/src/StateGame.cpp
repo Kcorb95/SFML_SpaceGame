@@ -3,6 +3,8 @@
 #include "State.h"
 #include "StateGame.h"
 #include "StateMenu.h"
+#include <iostream>
+#include <random>
 
 void StateGame::draw(const float dt)
 {
@@ -13,8 +15,6 @@ void StateGame::draw(const float dt)
 
 	this->m_Game->m_Window.setView(this->m_GameView);
 
-	//this->m_Game->m_Window.draw(this->m_Game->m_Player.getSprite());
-	//this->m_Game->m_Window.draw(this->m_Game->m_Enemy.getSprite());
 	this->m_Game->m_PlayerShip.draw(this->m_Game->m_Window, dt);
 	this->m_Game->m_EnemyShip.draw(this->m_Game->m_Window, dt);
 
@@ -30,8 +30,13 @@ void StateGame::update(const float dt)
 	//update for the guisystem
 	//update ammo etc
 	this->m_Game->m_PlayerShip.update();
-	this->m_Game->m_Player.update();
-	this->m_Game->m_Enemy.update();
+	this->m_Game->m_EnemyShip.update();
+
+	if (m_ActionState == ActionState::ATTACK)
+	{
+		attackPlayer();
+		m_ActionState = ActionState::IDLE;
+	}
 	return;
 }
 
@@ -86,7 +91,7 @@ void StateGame::input()
 				{
 				}
 			}
-			else if (this->m_GUISystem.at("backButton").m_Visible)
+			else
 			{
 				std::string msg = this->m_GUISystem.at("backButton").activate(guiPos);
 				if (msg == "back")
@@ -94,6 +99,28 @@ void StateGame::input()
 					this->m_GUISystem.at("attackMenu").hide();
 					this->m_GUISystem.at("backButton").hide();
 					this->m_GUISystem.at("actionMenu").show();
+				}
+				else
+				{
+					std::string msg = this->m_GUISystem.at("attackMenu").activate(guiPos);
+					if (msg.std::string::find("weapon") != std::string::npos && m_ActionState == ActionState::IDLE)
+					{
+						int selection = std::stoi(msg.std::string::substr(7, 1));
+						if (this->m_Game->m_PlayerShip.getWeapon(selection).getCurrentAmmo() > 0)//Does the player have the ammo to do this?
+						{
+							this->m_Game->m_EnemyShip.damage(this->m_Game->m_PlayerShip.getWeapon(selection));
+							this->m_Game->m_PlayerShip.getWeapon(selection).decreaseAmmo();
+							this->m_GUISystem.at("enemyHud").m_Entries.at(0).m_Text.setString("Armor: " + std::to_string(this->m_Game->m_EnemyShip.getCurrentArmor()));
+							this->m_GUISystem.at("enemyHud").m_Entries.at(1).m_Text.setString("Structure: " + std::to_string(this->m_Game->m_EnemyShip.getCurrentStructure()));
+							//Update GUI for decreased ammo (maybe make gui update method)
+
+							this->m_ActionState = ActionState::ATTACK;
+
+							this->m_GUISystem.at("attackMenu").hide();
+							this->m_GUISystem.at("backButton").hide();
+							this->m_GUISystem.at("actionMenu").show();
+						}
+					}
 				}
 			}
 		}
@@ -121,10 +148,6 @@ StateGame::StateGame(Game* game)
 	this->m_GUIView.setCenter(pos);
 	this->m_GameView.setCenter(pos);
 
-	//Spawn Ship and position sprite in middle left/right of screen
-	this->m_Game->m_Player.spawn(Vector2f(25, this->m_Game->m_Window.getSize().y * 0.5f));
-	this->m_Game->m_Enemy.spawn(1, Vector2f(this->m_Game->m_Window.getSize().x - 25, this->m_Game->m_Window.getSize().y * 0.5f));
-
 	/*
 	************
 	* Player HUD
@@ -132,8 +155,8 @@ StateGame::StateGame(Game* game)
 	*/
 	this->m_GUISystem.emplace("playerHud", GUI(sf::Vector2f(175, 30), 2, false, this->m_Game->m_StyleSheets.at("hud"),
 	{
-		std::make_pair("Armor: " + std::to_string(this->m_Game->m_Player.getArmor()), "armor"),
-		std::make_pair("Health: " + std::to_string(this->m_Game->m_Player.getHealth()), "health")
+		std::make_pair("Armor: " + std::to_string(this->m_Game->m_PlayerShip.getCurrentArmor()), "armor"),
+		std::make_pair("Structure: " + std::to_string(this->m_Game->m_PlayerShip.getCurrentStructure()), "structure")
 	}));
 
 	/*
@@ -143,8 +166,8 @@ StateGame::StateGame(Game* game)
 	*/
 	this->m_GUISystem.emplace("enemyHud", GUI(sf::Vector2f(175, 30), 2, false, this->m_Game->m_StyleSheets.at("hud"),
 	{
-		std::make_pair("Armor: " + std::to_string(this->m_Game->m_Enemy.getArmor()), "armor"),
-		std::make_pair("Health: " + std::to_string(this->m_Game->m_Enemy.getHealth()), "health")
+		std::make_pair("Armor: " + std::to_string(this->m_Game->m_EnemyShip.getCurrentArmor()), "armor"),
+		std::make_pair("Structure: " + std::to_string(this->m_Game->m_EnemyShip.getCurrentStructure()), "structure")
 	}));
 
 	/*
@@ -166,12 +189,12 @@ StateGame::StateGame(Game* game)
 	//Create a vector of weapon pairs
 	std::vector<std::pair<std::string, std::string>> weapons;
 	//Populate the vector based on current weapons owned by player
-	for (int i = 0; i < game->m_Player.getCurrentWeapons(); i++)
+	for (int i = 0; i < game->m_PlayerShip.m_Weapons.size(); i++)
 	{
 		weapons.push_back(
-			std::make_pair(game->m_Player.getWeapon(i).getName() +
-				" Ammo: " + std::to_string(game->m_Player.getWeapon(i).getCurrentAmmo()) + "/" + std::to_string(game->m_Player.getWeapon(i).getStartingAmmo()),
-				"weapon_" + i));
+			std::make_pair(game->m_PlayerShip.getWeapon(i).getName() +
+				" Ammo: " + std::to_string(game->m_PlayerShip.getWeapon(i).getCurrentAmmo()) + "/" + std::to_string(game->m_PlayerShip.getWeapon(i).getMaxAmmo()),
+				"weapon_" + std::to_string(i)));
 	}
 	this->m_GUISystem.emplace("attackMenu", GUI(sf::Vector2f(500, 30), 2, false, this->m_Game->m_StyleSheets.at("button"), weapons));
 
@@ -204,4 +227,35 @@ StateGame::StateGame(Game* game)
 
 	this->m_GUISystem.at("backButton").setOrigin(this->m_GUISystem.at("backButton").getSize().x * 0.5f, this->m_GUISystem.at("backButton").getSize().y);
 	this->m_GUISystem.at("backButton").setPosition(sf::Vector2f(this->m_Game->m_Window.getSize().x * 0.5 + 400, this->m_Game->m_Window.getSize().y - 5));
+}
+
+void StateGame::attackPlayer()
+{
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	std::uniform_real_distribution<double> dist(0, std::nextafter(5, DBL_MAX));
+	auto found = false;
+	int random;
+
+	while (!found)
+	{
+		random = (int)dist(mt);
+		std::cerr << random << std::endl;
+		if (this->m_Game->m_EnemyShip.getWeapon(random).getCurrentAmmo() > 0)//is there enough ammo to do this?
+		{
+			this->m_Game->m_PlayerShip.damage(this->m_Game->m_EnemyShip.getWeapon(random));//deal the damage to the player based on the randomly chosen enemy weapon
+			this->m_Game->m_EnemyShip.getWeapon(random).decreaseAmmo();//decrease the ammo for the chosen weapon
+			std::cerr << "Firing: " << this->m_Game->m_EnemyShip.getWeapon(random).getName() << " Ammo: " << std::to_string(this->m_Game->m_EnemyShip.getWeapon(random).getCurrentAmmo()) << std::endl;
+			found = true;
+		}
+		else { std::cerr << "Not Enough Ammo"; }
+	}
+
+	this->m_GUISystem.at("playerHud").m_Entries.at(0).m_Text.setString("Armor: " + std::to_string(this->m_Game->m_PlayerShip.getCurrentArmor()));
+	this->m_GUISystem.at("playerHud").m_Entries.at(1).m_Text.setString("Structure: " + std::to_string(this->m_Game->m_PlayerShip.getCurrentStructure()));
+
+	if (!this->m_Game->m_PlayerShip.isAlive)
+	{
+		std::cerr << "you lose!";
+	}
 }

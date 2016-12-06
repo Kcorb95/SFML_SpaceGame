@@ -7,38 +7,40 @@ class Weapon
 {
 private:
 	//Weapon name
-	String m_Name;
+	std::string m_Name;
 
 	//Weapon damage type
-	String m_DamageType;
+	std::string m_DamageType;
 
-	//Weapon Damage ammount per attack
+	//Weapon Damage amount per attack
 	int m_DamageValue;
 
 	//Weapon ammo to start
-	int m_StartingAmmo;
+	int m_MaxAmmo;
 
 	//Weapon ammo currently
 	int m_CurrentAmmo;
 
-	//Weapon cooldown time (in turns)
+	//Weapon cool down time (in turns)
 	int m_CooldownValue;
 	
-	//is weapon on cooldown?
+	//is weapon on cool down?
 	bool m_IsReady;
 
 public:
-	Weapon(String weaponName, String damageType, int damageValue, int startingAmmo, int currentAmmo, int cooldownValue);
+	Weapon(std::string weaponName, std::string damageType, int damageValue, int startingAmmo, int currentAmmo, int cooldownValue);
 
-	String getName();
+	std::string getName();
 
-	String getDamageType();
+	std::string getDamageType();
 
 	int getDamageValue();
 
-	int getStartingAmmo();
+	int getMaxAmmo();
 
 	int getCurrentAmmo();
+
+	void decreaseAmmo();
 
 	bool isReady();
 };

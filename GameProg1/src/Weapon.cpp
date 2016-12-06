@@ -1,22 +1,22 @@
 #include "Weapon.h"
 
-Weapon::Weapon(String weaponName, String damageType, int damageValue, int startingAmmo, int currentAmmo, int cooldownValue)
+Weapon::Weapon(std::string weaponName, std::string damageType, int damageValue, int maxAmmo, int currentAmmo, int cooldownValue)
 {
 	m_Name = weaponName;
 	m_DamageType = damageType;
 	m_DamageValue = damageValue;
-	m_StartingAmmo = startingAmmo;
+	m_MaxAmmo = maxAmmo;
 	m_CurrentAmmo = currentAmmo;
 	m_CooldownValue = cooldownValue;
 	m_IsReady = true;
 }
 
-String Weapon::getName()
+std::string Weapon::getName()
 {
 	return m_Name;
 }
 
-String Weapon::getDamageType() 
+std::string Weapon::getDamageType()
 {
 	return m_DamageType;
 }
@@ -26,9 +26,9 @@ int Weapon::getDamageValue()
 	return m_DamageValue;
 }
 
-int Weapon::getStartingAmmo()
+int Weapon::getMaxAmmo()
 {
-	return m_StartingAmmo;
+	return m_MaxAmmo;
 }
 
 int Weapon::getCurrentAmmo()
@@ -39,4 +39,9 @@ int Weapon::getCurrentAmmo()
 bool Weapon::isReady()
 {
 	return m_IsReady;
+}
+
+void Weapon::decreaseAmmo()
+{
+	--m_CurrentAmmo;
 }

@@ -20,9 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AnimationHandler.h" />
-    <ClInclude Include="src\Enemy.h" />
     <ClInclude Include="src\GUI.h" />
-    <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\Ship.h" />
     <ClInclude Include="src\State.h" />
     <ClInclude Include="src\StateGame.h" />
@@ -33,10 +31,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AnimationHandler.cpp" />
-    <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\GUI.cpp" />
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Ship.cpp" />
     <ClCompile Include="src\StateGame.cpp" />
     <ClCompile Include="src\Game.cpp" />

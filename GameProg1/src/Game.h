@@ -5,8 +5,6 @@
 
 #include "TextureManager.h"
 #include "GUI.h"
-#include "Player.h"
-#include "Enemy.h"
 #include "Ship.h"
 
 class State;
@@ -25,9 +23,6 @@ public:
 	sf::RenderWindow m_Window;
 	TextureManager m_TextureManager;
 	sf::Sprite m_Background;
-
-	Player m_Player;
-	Enemy m_Enemy;
 
 	Ship m_PlayerShip;
 	Ship m_EnemyShip;

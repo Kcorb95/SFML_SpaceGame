@@ -68,7 +68,6 @@ void StateMenu::input()
 				if (msg == "new_game")
 				{
 					this->loadGame();
-					std::cout << std::to_string(this->m_Game->m_States.size()) + " - ";
 				}
 				else if (msg == "exit_game")
 				{

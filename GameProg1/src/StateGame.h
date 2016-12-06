@@ -5,7 +5,7 @@
 #include "State.h"
 #include "GUI.h"
 
-enum class ActionState { NONE, ATTACK };
+enum class ActionState { IDLE, ATTACK };
 
 class StateGame : public State
 {
@@ -23,4 +23,6 @@ public:
 	virtual void input();
 
 	StateGame(Game* game);
+
+	void attackPlayer();
 };
