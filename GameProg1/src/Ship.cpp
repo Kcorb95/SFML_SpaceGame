@@ -45,7 +45,7 @@ int Ship::getMaxStructure()
 	return this->m_MaxStructure;
 }
 
-Weapon Ship::getWeapon(int index)
+Weapon& Ship::getWeapon(int index)
 {
 	if (index < this->m_Weapons.size())
 		return this->m_Weapons.at(index);

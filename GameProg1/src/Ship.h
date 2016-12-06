@@ -60,7 +60,7 @@ public:
 	int getCurrentStructure();
 	int getMaxStructure();
 
-	Weapon getWeapon(int index);
+	Weapon& getWeapon(int index);
 
 	void setPosition(sf::Vector2f position);
 

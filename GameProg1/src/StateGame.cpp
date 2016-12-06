@@ -240,7 +240,7 @@ void StateGame::attackPlayer()
 	while (!found)
 	{
 		random = (int)dist(mt);
-		std::cerr << random << std::endl;
+		std::cerr << "Random: " << random << std::endl;
 		if (this->m_Game->m_EnemyShip.getWeapon(random).getCurrentAmmo() > 0)//is there enough ammo to do this?
 		{
 			this->m_Game->m_PlayerShip.damage(this->m_Game->m_EnemyShip.getWeapon(random));//deal the damage to the player based on the randomly chosen enemy weapon
