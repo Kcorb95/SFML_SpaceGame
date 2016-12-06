@@ -34,7 +34,7 @@ void StateGame::update(const float dt)
 
 	if (m_ActionState == ActionState::ATTACK)
 	{
-		attackPlayer();
+		enemyAction();
 		m_ActionState = ActionState::IDLE;
 	}
 	return;
@@ -108,11 +108,21 @@ void StateGame::input()
 						int selection = std::stoi(msg.std::string::substr(7, 1));
 						if (this->m_Game->m_PlayerShip.getWeapon(selection).getCurrentAmmo() > 0)//Does the player have the ammo to do this?
 						{
-							this->m_Game->m_EnemyShip.damage(this->m_Game->m_PlayerShip.getWeapon(selection));
-							this->m_Game->m_PlayerShip.getWeapon(selection).decreaseAmmo();
-							this->m_GUISystem.at("enemyHud").m_Entries.at(0).m_Text.setString("Armor: " + std::to_string(this->m_Game->m_EnemyShip.getCurrentArmor()));
-							this->m_GUISystem.at("enemyHud").m_Entries.at(1).m_Text.setString("Structure: " + std::to_string(this->m_Game->m_EnemyShip.getCurrentStructure()));
-							//Update GUI for decreased ammo (maybe make gui update method)
+							int hitChance = random(100);
+							if (hitChance < this->m_Game->m_PlayerShip.getWeapon(selection).getHitChance())
+							{
+								this->m_Game->m_EnemyShip.damage(this->m_Game->m_PlayerShip.getWeapon(selection));
+								this->m_Game->m_PlayerShip.getWeapon(selection).decreaseAmmo();
+								this->m_GUISystem.at("enemyHud").m_Entries.at(0).m_Text.setString("Armor: " + std::to_string(this->m_Game->m_EnemyShip.getCurrentArmor()));
+								this->m_GUISystem.at("enemyHud").m_Entries.at(1).m_Text.setString("Structure: " + std::to_string(this->m_Game->m_EnemyShip.getCurrentStructure()));
+								//Update GUI for decreased ammo (maybe make gui update method)
+							}
+							else
+							{
+								std::cerr << "Player Miss!!" << std::endl;
+							}
+
+							
 
 							this->m_ActionState = ActionState::ATTACK;
 
@@ -229,23 +239,28 @@ StateGame::StateGame(Game* game)
 	this->m_GUISystem.at("backButton").setPosition(sf::Vector2f(this->m_Game->m_Window.getSize().x * 0.5 + 400, this->m_Game->m_Window.getSize().y - 5));
 }
 
-void StateGame::attackPlayer()
+void StateGame::enemyAction()
 {
 	std::random_device rd;
 	std::mt19937 mt(rd());
 	std::uniform_real_distribution<double> dist(0, std::nextafter(5, DBL_MAX));
 	auto found = false;
-	int random;
+	int weaponSelection;
+	int hitChance;
 
 	while (!found)
 	{
-		random = (int)dist(mt);
-		std::cerr << "Random: " << random << std::endl;
-		if (this->m_Game->m_EnemyShip.getWeapon(random).getCurrentAmmo() > 0)//is there enough ammo to do this?
+		weaponSelection = random(this->m_Game->m_EnemyShip.m_Weapons.size());
+		std::cerr << "Random: " << weaponSelection << std::endl;
+		if (this->m_Game->m_EnemyShip.getWeapon(weaponSelection).getCurrentAmmo() > 0)//is there enough ammo to do this?
 		{
-			this->m_Game->m_PlayerShip.damage(this->m_Game->m_EnemyShip.getWeapon(random));//deal the damage to the player based on the randomly chosen enemy weapon
-			this->m_Game->m_EnemyShip.getWeapon(random).decreaseAmmo();//decrease the ammo for the chosen weapon
-			std::cerr << "Firing: " << this->m_Game->m_EnemyShip.getWeapon(random).getName() << " Ammo: " << std::to_string(this->m_Game->m_EnemyShip.getWeapon(random).getCurrentAmmo()) << std::endl;
+			hitChance = random(100);
+			if (hitChance < this->m_Game->m_EnemyShip.getWeapon(weaponSelection).getHitChance())//if odd
+			{
+				fireWeapon(weaponSelection);//hit
+			}
+			else
+				std::cerr << "MISS!! " << hitChance << std::endl;
 			found = true;
 		}
 		else { std::cerr << "Not Enough Ammo"; }
@@ -258,4 +273,20 @@ void StateGame::attackPlayer()
 	{
 		std::cerr << "you lose!";
 	}
+}
+
+void StateGame::fireWeapon(const int index)
+{
+	this->m_Game->m_PlayerShip.damage(this->m_Game->m_EnemyShip.getWeapon(index));//deal the damage to the player based on the randomly chosen enemy weapon
+	this->m_Game->m_EnemyShip.getWeapon(index).decreaseAmmo();//decrease the ammo for the chosen weapon
+	std::cerr << "Firing: " << this->m_Game->m_EnemyShip.getWeapon(index).getName()
+		<< " Ammo: " << std::to_string(this->m_Game->m_EnemyShip.getWeapon(index).getCurrentAmmo()) << std::endl;
+}
+
+int StateGame::random(int range)
+{
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	std::uniform_real_distribution<double> dist(0, std::nextafter(range, DBL_MAX));
+	return (int)dist(mt);
 }

@@ -16,6 +16,12 @@ int Weapon::getDamageValue()
 	return this->m_DamageValue;
 }
 
+int Weapon::getHitChance()
+{
+	return this->m_HitChance;
+}
+
+
 int Weapon::getMaxAmmo()
 {
 	return this->m_MaxAmmo;
@@ -33,9 +39,7 @@ bool Weapon::isReady()
 
 void Weapon::decreaseAmmo()
 {
-	std::cerr << "Current Ammo: " << m_CurrentAmmo << std::endl;
 	--this->m_CurrentAmmo;
-	std::cerr << "Current Ammo: " << m_CurrentAmmo << std::endl;
 }
 
 void Weapon::increaseAmmo(int amount)

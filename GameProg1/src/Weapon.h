@@ -13,6 +13,9 @@ private:
 	//Weapon Damage amount per attack
 	int m_DamageValue;
 
+	//Weapon hit chance
+	int m_HitChance;
+
 	//Weapon ammo to start
 	int m_MaxAmmo;
 
@@ -28,11 +31,12 @@ private:
 public:
 	Weapon() {}
 
-	Weapon(const std::string weaponName, const std::string damageType, const unsigned int damageValue, const unsigned int maxAmmo, const unsigned int cooldownValue)
+	Weapon(const std::string weaponName, const std::string damageType, const unsigned int damageValue, const unsigned int hitChance, const unsigned int maxAmmo, const unsigned int cooldownValue)
 	{
 		this->m_Name = weaponName;
 		this->m_DamageType = damageType;
 		this->m_DamageValue = damageValue;
+		this->m_HitChance = hitChance;
 		this->m_MaxAmmo = maxAmmo;
 		this->m_CurrentAmmo = maxAmmo;
 		this->m_CooldownValue = cooldownValue;
@@ -44,6 +48,8 @@ public:
 	std::string getDamageType();
 
 	int getDamageValue();
+
+	int getHitChance();
 
 	int getMaxAmmo();
 

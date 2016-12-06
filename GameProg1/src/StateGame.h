@@ -24,5 +24,9 @@ public:
 
 	StateGame(Game* game);
 
-	void attackPlayer();
+	void enemyAction();
+
+	void fireWeapon(const int index);
+
+	int random(int range);
 };
