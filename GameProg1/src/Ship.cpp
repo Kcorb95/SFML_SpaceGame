@@ -47,10 +47,10 @@ int Ship::getMaxStructure()
 
 Weapon Ship::getWeapon(int index)
 {
-	if (index < m_Weapons.size())
-		return m_Weapons.at(index);
+	if (index < this->m_Weapons.size())
+		return this->m_Weapons.at(index);
 	else
-		return m_Weapons.at(0);
+		return this->m_Weapons.at(0);
 }
 
 void Ship::setPosition(Vector2f position)
@@ -66,9 +66,9 @@ void Ship::setRotation(int degrees)
 void Ship::repair(int amount, int type)
 {
 	if (type == 2)
-		m_Structure += amount;
+		this->m_Structure += amount;
 	else
-		m_Armor += amount;
+		this->m_Armor += amount;
 }
 
 void Ship::damage(Weapon weapon)
@@ -92,15 +92,15 @@ void Ship::damage(int amount, int location)
 		damageArmor(amount);
 		break;
 	case 2://Ballistic good against Structure, bad against else
-		if (m_Armor == 0)//if there is no Armor
+		if (this->m_Armor == 0)//if there is no Armor
 			damageStructure(amount); //damage structure for normal amount
 		else//then there is Armor
 		{
-			if ((amount / 2) > m_Armor)//If I will do more reduced damage than there is remaining armor
+			if ((amount / 2) > this->m_Armor)//If I will do more reduced damage than there is remaining armor
 			{
 				amount /= 2;// set the amount to half
-				amount -= m_Armor;//"deal" the damage
-				m_Armor = 0; //"deal" the damage
+				amount -= this->m_Armor;//"deal" the damage
+				this->m_Armor = 0; //"deal" the damage
 				damageStructure(amount * 2);//deal the remaining normal damage to structure
 			}
 			else
@@ -112,27 +112,27 @@ void Ship::damage(int amount, int location)
 
 void Ship::damageArmor(int amount)
 {
-	if (m_Armor == 0)//If no remaining Armor
-		m_Structure -= (amount / 2);//Deal reduced damage to structure
-	else if (amount > m_Armor)//if you deal more damage than there is remaining armor
+	if (this->m_Armor == 0)//If no remaining Armor
+		this->m_Structure -= (amount / 2);//Deal reduced damage to structure
+	else if (amount > this->m_Armor)//if you deal more damage than there is remaining armor
 	{
-		amount -= m_Armor;//reduce the amount of damage by the remaining armor
-		m_Armor = 0;//set armor to zero since you just "dealt" that damage
-		m_Structure -= (amount / 2);//deal the reduced remaining damage
+		amount -= this->m_Armor;//reduce the amount of damage by the remaining armor
+		this->m_Armor = 0;//set armor to zero since you just "dealt" that damage
+		this->m_Structure -= (amount / 2);//deal the reduced remaining damage
 	}
 	else//damage Armor for normal amount
-		m_Armor -= amount;
+		this->m_Armor -= amount;
 }
 
 void Ship::damageStructure(int amount)
 {
-	if (amount < m_Structure)//if the amount of damage to be dealt *wont* kill the target
+	if (amount < this->m_Structure)//if the amount of damage to be dealt *wont* kill the target
 	{
-		m_Structure -= amount;
+		this->m_Structure -= amount;
 	}
 	else //target is totally dead
 	{
-		isAlive = false;
-		m_Structure = 0;
+		this->isAlive = false;
+		this->m_Structure = 0;
 	}
 }

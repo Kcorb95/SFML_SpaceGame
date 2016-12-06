@@ -29,7 +29,7 @@ public:
 	Ship() {}
 
 	Ship(const unsigned int maxArmor, const unsigned int maxStructure, const std::vector<Weapon>& weapons,
-		Vector2f shipDimensions, sf::Texture& texture, const std::vector<Animation>& animations)
+		const Vector2f shipDimensions, const sf::Texture& texture, const std::vector<Animation>& animations)
 	{
 		this->m_Armor = maxArmor;
 		this->m_MaxArmor = maxArmor;

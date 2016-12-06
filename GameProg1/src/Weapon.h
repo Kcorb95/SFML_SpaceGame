@@ -28,7 +28,9 @@ private:
 	bool m_IsReady;
 
 public:
-	Weapon(std::string weaponName, std::string damageType, int damageValue, int startingAmmo, int currentAmmo, int cooldownValue);
+	Weapon(){}
+
+	Weapon(std::string weaponName, std::string damageType, const unsigned int damageValue, const unsigned int maxAmmo, const unsigned int cooldownValue);
 
 	std::string getName();
 
