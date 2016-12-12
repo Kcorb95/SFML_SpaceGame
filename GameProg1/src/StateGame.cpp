@@ -32,7 +32,7 @@ void StateGame::update(const float dt)
 	this->m_Game->m_PlayerShip.update();
 	this->m_Game->m_EnemyShip.update();
 
-	if (m_ActionState == ActionState::ATTACK)
+	if (m_ActionState == ActionState::ACTION)
 	{
 		enemyAction();
 		m_ActionState = ActionState::IDLE;
@@ -72,6 +72,7 @@ void StateGame::input()
 			//do an action state thing here eventually so that only when attack state etc
 			this->m_GUISystem.at("actionMenu").highlight(this->m_GUISystem.at("actionMenu").getEntry(guiPos));
 			this->m_GUISystem.at("attackMenu").highlight(this->m_GUISystem.at("attackMenu").getEntry(guiPos));
+			this->m_GUISystem.at("itemMenu").highlight(this->m_GUISystem.at("itemMenu").getEntry(guiPos));
 			this->m_GUISystem.at("backButton").highlight(this->m_GUISystem.at("backButton").getEntry(guiPos));
 			break;
 		}
@@ -89,6 +90,9 @@ void StateGame::input()
 				}
 				else if (msg == "useItem")
 				{
+					this->m_GUISystem.at("itemMenu").show();
+					this->m_GUISystem.at("backButton").show();
+					this->m_GUISystem.at("actionMenu").hide();
 				}
 			}
 			else
@@ -97,6 +101,7 @@ void StateGame::input()
 				if (msg == "back")
 				{
 					this->m_GUISystem.at("attackMenu").hide();
+					this->m_GUISystem.at("itemMenu").hide();
 					this->m_GUISystem.at("backButton").hide();
 					this->m_GUISystem.at("actionMenu").show();
 				}
@@ -108,28 +113,52 @@ void StateGame::input()
 						int selection = std::stoi(msg.std::string::substr(7, 1));
 						if (this->m_Game->m_PlayerShip.getWeapon(selection).getCurrentAmmo() > 0)//Does the player have the ammo to do this?
 						{
+							this->m_Game->m_PlayerShip.getWeapon(selection).decreaseAmmo();//Decrease ammo and fire weapons
 							int hitChance = random(100);
-							if (hitChance < this->m_Game->m_PlayerShip.getWeapon(selection).getHitChance())
+							if (hitChance < this->m_Game->m_PlayerShip.getWeapon(selection).getHitChance())//Does it hit?
 							{
 								this->m_Game->m_EnemyShip.damage(this->m_Game->m_PlayerShip.getWeapon(selection));
-								this->m_Game->m_PlayerShip.getWeapon(selection).decreaseAmmo();
 								this->m_GUISystem.at("enemyHud").m_Entries.at(0).m_Text.setString("Armor: " + std::to_string(this->m_Game->m_EnemyShip.getCurrentArmor()));
 								this->m_GUISystem.at("enemyHud").m_Entries.at(1).m_Text.setString("Structure: " + std::to_string(this->m_Game->m_EnemyShip.getCurrentStructure()));
-								//Update GUI for decreased ammo (maybe make gui update method)
 							}
 							else
 							{
+								
 								std::cerr << "Player Miss!!" << std::endl;
 							}
+							this->m_GUISystem.at("attackMenu").m_Entries.at(selection).m_Text.setString(this->m_Game->m_PlayerShip.getWeapon(selection).getName() +
+								" Ammo: " + std::to_string(this->m_Game->m_PlayerShip.getWeapon(selection).getCurrentAmmo()) + "/" + std::to_string(this->m_Game->m_PlayerShip.getWeapon(selection).getMaxAmmo()));
+							//Update GUI for decreased ammo (maybe make gui update method)
 
-							
-
-							this->m_ActionState = ActionState::ATTACK;
+							this->m_ActionState = ActionState::ACTION;
 
 							this->m_GUISystem.at("attackMenu").hide();
 							this->m_GUISystem.at("backButton").hide();
 							this->m_GUISystem.at("actionMenu").show();
 						}
+					}
+					else
+					{
+						std::string msg = this->m_GUISystem.at("itemMenu").activate(guiPos);
+						if (msg.std::string::find("item") != std::string::npos && m_ActionState == ActionState::IDLE)
+						{
+							int selection = std::stoi(msg.std::string::substr(5, 1));
+							this->m_Game->m_PlayerShip.useItem(this->m_Game->m_PlayerShip.getItem(selection));
+
+							//Remove the used item from inventory (maybe have multi-use items)
+							std::swap(m_Game->m_PlayerShip.m_Items.at(selection), m_Game->m_PlayerShip.m_Items.back());//swap used item with item at back of array
+							m_Game->m_PlayerShip.m_Items.pop_back();//pop the last element off
+							this->m_GUISystem.erase("itemMenu");//erase old itemMenu
+
+							updateItems();//create new item menu
+							//Update GUI for decreased ammo (maybe make gui update method)
+						}
+
+						this->m_ActionState = ActionState::ACTION;
+
+						this->m_GUISystem.at("itemMenu").hide();
+						this->m_GUISystem.at("backButton").hide();
+						this->m_GUISystem.at("actionMenu").show();
 					}
 				}
 			}
@@ -188,7 +217,7 @@ StateGame::StateGame(Game* game)
 	this->m_GUISystem.emplace("actionMenu", GUI(sf::Vector2f(175, 40), 2, false, this->m_Game->m_StyleSheets.at("button"),
 	{
 		std::make_pair("Attack!", "attack"),
-		std::make_pair("Use Item", "use_item")
+		std::make_pair("Use Item", "useItem")
 	}));
 
 	/*
@@ -207,6 +236,24 @@ StateGame::StateGame(Game* game)
 				"weapon_" + std::to_string(i)));
 	}
 	this->m_GUISystem.emplace("attackMenu", GUI(sf::Vector2f(500, 30), 2, false, this->m_Game->m_StyleSheets.at("button"), weapons));
+
+	/*
+	***********
+	* Item Menu
+	***********
+	*/
+	//Create a vector of item pairs
+	//Populate vector
+	for (int i = 0; i < game->m_PlayerShip.m_Items.size(); i++)
+	{
+		Item& item = game->m_PlayerShip.getItem(i);
+		this->m_Game->m_PlayerShip.m_ItemPairs.push_back(
+			std::make_pair(item.getName() +
+				" | Strength: " + std::to_string(item.getStrength()) +
+				" | Turns: " + std::to_string(item.getDuration()),
+				"item_" + std::to_string(i)));
+	}
+	this->m_GUISystem.emplace("itemMenu", GUI(sf::Vector2f(550, 30), 2, false, this->m_Game->m_StyleSheets.at("button"), this->m_Game->m_PlayerShip.m_ItemPairs));
 
 	/*
 	*************
@@ -234,6 +281,9 @@ StateGame::StateGame(Game* game)
 
 	this->m_GUISystem.at("attackMenu").setOrigin(this->m_GUISystem.at("attackMenu").getSize().x * 0.5f, this->m_GUISystem.at("attackMenu").getSize().y);
 	this->m_GUISystem.at("attackMenu").setPosition(sf::Vector2f(this->m_Game->m_Window.getSize().x * 0.5, this->m_Game->m_Window.getSize().y - 25));
+
+	this->m_GUISystem.at("itemMenu").setOrigin(this->m_GUISystem.at("itemMenu").getSize().x * 0.5f, this->m_GUISystem.at("itemMenu").getSize().y);
+	this->m_GUISystem.at("itemMenu").setPosition(sf::Vector2f(this->m_Game->m_Window.getSize().x * 0.5, this->m_Game->m_Window.getSize().y - 25));
 
 	this->m_GUISystem.at("backButton").setOrigin(this->m_GUISystem.at("backButton").getSize().x * 0.5f, this->m_GUISystem.at("backButton").getSize().y);
 	this->m_GUISystem.at("backButton").setPosition(sf::Vector2f(this->m_Game->m_Window.getSize().x * 0.5 + 400, this->m_Game->m_Window.getSize().y - 5));
@@ -289,4 +339,21 @@ int StateGame::random(int range)
 	std::mt19937 mt(rd());
 	std::uniform_real_distribution<double> dist(0, std::nextafter(range, DBL_MAX));
 	return (int)dist(mt);
+}
+
+void StateGame::updateItems()
+{
+	this->m_Game->m_PlayerShip.m_ItemPairs.clear();
+	for (int i = 0; i < this->m_Game->m_PlayerShip.m_Items.size(); i++) {
+		Item& item = this->m_Game->m_PlayerShip.getItem(i);
+		this->m_Game->m_PlayerShip.m_ItemPairs.push_back(
+			std::make_pair(item.getName() +
+				" | Strength: " + std::to_string(item.getStrength()) +
+				" | Turns: " + std::to_string(item.getDuration()),
+				"item_" + std::to_string(i)));
+	}
+	this->m_GUISystem.emplace("itemMenu", GUI(sf::Vector2f(550, 30), 2, false, this->m_Game->m_StyleSheets.at("button"), this->m_Game->m_PlayerShip.m_ItemPairs));
+
+	this->m_GUISystem.at("itemMenu").setOrigin(this->m_GUISystem.at("itemMenu").getSize().x * 0.5f, this->m_GUISystem.at("itemMenu").getSize().y);
+	this->m_GUISystem.at("itemMenu").setPosition(sf::Vector2f(this->m_Game->m_Window.getSize().x * 0.5, this->m_Game->m_Window.getSize().y - 25));
 }

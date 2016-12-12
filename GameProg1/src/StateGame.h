@@ -5,7 +5,7 @@
 #include "State.h"
 #include "GUI.h"
 
-enum class ActionState { IDLE, ATTACK };
+enum class ActionState { IDLE, ACTION };
 
 class StateGame : public State
 {
@@ -29,4 +29,6 @@ public:
 	void fireWeapon(const int index);
 
 	int random(int range);
+
+	void updateItems();
 };

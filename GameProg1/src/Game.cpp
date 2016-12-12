@@ -92,16 +92,18 @@ void Game::loadStyleSheets()
 void Game::loadShips()//This will allow us to create all of the ships for the game and then draw them when needed
 {
 	/*Player Ship*/
-	this->m_PlayerShip = Ship(100, 100,//Structure/Armor
+	this->m_PlayerShip = Ship(100, 100, 10, //Structure/Armor/Evasion
 	{ Weapon("Basic Railgun", "Kinetic", 6, 75, 50, 0), Weapon("Basic Missile Launcher", "Ballistic", 15, 50, 10, 2) }, //Weapons
+	{ Item(ItemType::ArmorRepair, "Basic Armor Repair", 50, 1), Item(ItemType::EvasionBoost, "Small Thrust Booster", 10, 3) },//Items
 		sf::Vector2f(150, 174), m_TextureManager.getRef("player"),//Dimensions and Texture
 		{ Animation(0, 2, 0.3f), Animation(0, 2, 0.1f),Animation(0, 2, 0.3f) });//Animations
 
 	this->m_PlayerShip.setPosition(sf::Vector2f(25, 400));//hard coded for now, possibly make resolution a variable
 
 	/*Starter Enemy Ship*/
-	this->m_EnemyShip = Ship(150, 150,//Structure/Armor
+	this->m_EnemyShip = Ship(150, 150, 10, //Structure/Armor/Evasion
 	{ Weapon("Medium Railgun", "Kinetic", 8, 70, 50, 0), Weapon("Light Missile Launcher", "Ballistic", 10, 50, 5, 1) }, //Weapons
+	{ Item(ItemType::ArmorRepair, "Basic Armor Repair", 50, 1), Item(ItemType::EvasionBoost, "Small Thrust Booster", 10, 3) },//Items
 		sf::Vector2f(150, 174), m_TextureManager.getRef("enemy"),//Dimensions and Texture
 		{ Animation(0, 2, 0.3f), Animation(0, 2, 0.1f),Animation(0, 2, 0.3f) });//Animations
 	this->m_EnemyShip.setRotation(180);

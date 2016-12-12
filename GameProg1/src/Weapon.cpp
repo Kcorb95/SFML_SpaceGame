@@ -1,5 +1,4 @@
 #include "Weapon.h"
-#include <iostream>
 
 std::string Weapon::getName()
 {

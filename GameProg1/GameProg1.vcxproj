@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="src\AnimationHandler.h" />
     <ClInclude Include="src\GUI.h" />
+    <ClInclude Include="src\Item.h" />
     <ClInclude Include="src\Ship.h" />
     <ClInclude Include="src\State.h" />
     <ClInclude Include="src\StateGame.h" />
@@ -32,6 +33,7 @@
   <ItemGroup>
     <ClCompile Include="src\AnimationHandler.cpp" />
     <ClCompile Include="src\GUI.cpp" />
+    <ClCompile Include="src\Item.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Ship.cpp" />
     <ClCompile Include="src\StateGame.cpp" />

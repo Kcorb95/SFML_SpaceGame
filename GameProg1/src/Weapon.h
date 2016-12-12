@@ -29,8 +29,6 @@ private:
 	bool m_IsReady;
 
 public:
-	Weapon() {}
-
 	Weapon(const std::string weaponName, const std::string damageType, const unsigned int damageValue, const unsigned int hitChance, const unsigned int maxAmmo, const unsigned int cooldownValue)
 	{
 		this->m_Name = weaponName;

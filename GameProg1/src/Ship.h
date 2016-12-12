@@ -5,6 +5,7 @@
 
 #include "AnimationHandler.h"
 #include "Weapon.h"
+#include "Item.h"
 
 class Ship
 {
@@ -15,20 +16,26 @@ private:
 	int m_Structure;
 	int m_MaxStructure;
 
+	int m_Evasion;
+	int m_MaxEvasion;
+
 public:
 	AnimationHandler m_AnimationHandler;
 	sf::Sprite m_Sprite;
 
 	std::vector<Weapon> m_Weapons;
+	std::vector<Item> m_Items;
+	std::vector<std::pair<std::string, std::string>> m_ItemPairs;
 
 	//Allows different looking versions of the same ship
 	int shipVariant = 0;
 
 	bool isAlive = true;
+	bool m_IsBoosted = false;
 
-	Ship() {}
+	Ship() { }
 
-	Ship(const unsigned int maxArmor, const unsigned int maxStructure, const std::vector<Weapon>& weapons,
+	Ship(const unsigned int maxArmor, const unsigned int maxStructure, int evasion, const std::vector<Weapon>& weapons, const std::vector<Item>& items,
 		const sf::Vector2f shipDimensions, const sf::Texture& texture, const std::vector<Animation>& animations)
 	{
 		this->m_Armor = maxArmor;
@@ -37,8 +44,14 @@ public:
 		this->m_Structure = maxStructure;
 		this->m_MaxStructure = maxStructure;
 
+		this->m_Evasion = evasion;
+		this->m_MaxEvasion = evasion;
+
 		for (int i = 0; i < weapons.size(); i++)
 			this->m_Weapons.push_back(weapons.at(i));
+
+		for (int i = 0; i < items.size(); i++)
+			this->m_Items.push_back(items.at(i));
 
 		this->m_Sprite.setOrigin(sf::Vector2f(0.0f, shipDimensions.y * 0.5f));
 		this->m_Sprite.setTexture(texture);
@@ -62,11 +75,17 @@ public:
 
 	Weapon& getWeapon(int index);
 
+	Item& getItem(int index);
+
+	void useItem(Item item);
+
 	void setPosition(sf::Vector2f position);
 
 	void setRotation(int degrees);
 
 	void repair(int amount, int location);
+
+	void increaseEvasion(bool isBoosted, int strength);
 
 	void damage(Weapon weapon);
 

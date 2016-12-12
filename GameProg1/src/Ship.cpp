@@ -53,6 +53,14 @@ Weapon& Ship::getWeapon(int index)
 		return this->m_Weapons.at(0);
 }
 
+Item& Ship::getItem(int index)
+{
+	if (index < this->m_Items.size())
+		return this->m_Items.at(index);
+	else
+		return this->m_Items.at(0);
+}
+
 void Ship::setPosition(sf::Vector2f position)
 {
 	this->m_Sprite.setPosition(position);
@@ -65,10 +73,18 @@ void Ship::setRotation(int degrees)
 
 void Ship::repair(int amount, int type)
 {
-	if (type == 2)
+	if (type == 1)
 		this->m_Structure += amount;
 	else
 		this->m_Armor += amount;
+}
+
+void Ship::increaseEvasion(bool isBoosted, int strength)
+{
+	if (isBoosted)
+		this->m_Evasion += strength;
+	else
+		this->m_Evasion == this->m_MaxEvasion;
 }
 
 void Ship::damage(Weapon weapon)
@@ -88,10 +104,10 @@ void Ship::damage(int amount, int location)
 {
 	switch (location)
 	{
-	case 1://Kinetic good against Armor, bad against else
+	case 1: //Kinetic good against Armor, bad against else
 		damageArmor(amount);
 		break;
-	case 2://Ballistic good against Structure, bad against else
+	case 2: //Ballistic good against Structure, bad against else
 		if (this->m_Armor == 0)//if there is no Armor
 			damageStructure(amount); //damage structure for normal amount
 		else//then there is Armor
@@ -135,4 +151,16 @@ void Ship::damageStructure(int amount)
 		this->isAlive = false;
 		this->m_Structure = 0;
 	}
+}
+
+void Ship::useItem(Item item)
+{
+	if (item.getItemType() == ItemType::ArmorRepair)
+		repair(item.getStrength(), 2);
+	else if (item.getItemType() == ItemType::StructureRepair)
+		repair(item.getStrength(), 1);
+	else if (item.getItemType() == ItemType::ShieldBoost)
+		repair(item.getStrength(), 3);
+	else if (item.getItemType() == ItemType::EvasionBoost)
+		increaseEvasion(m_IsBoosted, item.getStrength());
 }

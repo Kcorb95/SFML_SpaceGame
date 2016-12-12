@@ -34,59 +34,59 @@ void StateMenu::input()
 		{
 			//Close the window
 		case sf::Event::Closed:
-		{
-			m_Game->m_Window.close();
-		}
-		//Resize the window
-		case sf::Event::Resized:
-		{
-			this->m_View.setSize(event.size.width, event.size.height);
-			this->m_Game->m_Background.setPosition(this->m_Game->m_Window.mapPixelToCoords(sf::Vector2i(0, 0), this->m_View));
-			sf::Vector2f pos = sf::Vector2f(event.size.width, event.size.height);
-			pos *= 0.5f;
-			pos = this->m_Game->m_Window.mapPixelToCoords(sf::Vector2i(pos), this->m_View);
-			this->m_GUISystem.at("menu").setPosition(pos);
-			this->m_Game->m_Background.setScale(
-				float(event.size.width) / float(this->m_Game->m_Background.getTexture()->getSize().x),
-				float(event.size.height) / float(this->m_Game->m_Background.getTexture()->getSize().y));
-			break;
-		}
-		//Highlight Menu Items
-		case sf::Event::MouseMoved:
-		{
-			this->m_GUISystem.at("menu").highlight(this->m_GUISystem.at("menu").getEntry(mousePos));
-			break;;
-		}
-
-		//Click on Menu Items
-		case sf::Event::MouseButtonPressed:
-		{
-			if (event.mouseButton.button == sf::Mouse::Left)
 			{
-				std::string msg = this->m_GUISystem.at("menu").activate(mousePos);
-
-				if (msg == "new_game")
-				{
-					this->loadGame();
-				}
-				else if (msg == "exit_game")
-				{
-					m_Game->m_Window.close();
-				}
-				else if (msg == "continue_game")
-				{
-					m_Game->m_States.pop();
-				}
+				m_Game->m_Window.close();
 			}
-			break;
-		}
-		//Handle key presses
+			//Resize the window
+		case sf::Event::Resized:
+			{
+				this->m_View.setSize(event.size.width, event.size.height);
+				this->m_Game->m_Background.setPosition(this->m_Game->m_Window.mapPixelToCoords(sf::Vector2i(0, 0), this->m_View));
+				sf::Vector2f pos = sf::Vector2f(event.size.width, event.size.height);
+				pos *= 0.5f;
+				pos = this->m_Game->m_Window.mapPixelToCoords(sf::Vector2i(pos), this->m_View);
+				this->m_GUISystem.at("menu").setPosition(pos);
+				this->m_Game->m_Background.setScale(
+					    float(event.size.width) / float(this->m_Game->m_Background.getTexture()->getSize().x),
+					    float(event.size.height) / float(this->m_Game->m_Background.getTexture()->getSize().y));
+				break;
+			}
+			//Highlight Menu Items
+		case sf::Event::MouseMoved:
+			{
+				this->m_GUISystem.at("menu").highlight(this->m_GUISystem.at("menu").getEntry(mousePos));
+				break;;
+			}
+
+			//Click on Menu Items
+		case sf::Event::MouseButtonPressed:
+			{
+				if (event.mouseButton.button == sf::Mouse::Left)
+				{
+					std::string msg = this->m_GUISystem.at("menu").activate(mousePos);
+
+					if (msg == "new_game")
+					{
+						this->loadGame();
+					}
+					else if (msg == "exit_game")
+					{
+						m_Game->m_Window.close();
+					}
+					else if (msg == "continue_game")
+					{
+						m_Game->m_States.pop();
+					}
+				}
+				break;
+			}
+			//Handle key presses
 		case sf::Event::KeyPressed:
-		{
-			if (event.key.code == sf::Keyboard::Escape)
-				this->m_Game->m_Window.close();
-			break;
-		}
+			{
+				if (event.key.code == sf::Keyboard::Escape)
+					this->m_Game->m_Window.close();
+				break;
+			}
 		default:
 			break;
 		}
