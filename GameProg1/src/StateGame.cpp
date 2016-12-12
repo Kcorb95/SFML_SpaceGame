@@ -115,7 +115,7 @@ void StateGame::input()
 						{
 							this->m_Game->m_PlayerShip.getWeapon(selection).decreaseAmmo();//Decrease ammo and fire weapons
 							int hitChance = random(100);
-							if (hitChance < this->m_Game->m_PlayerShip.getWeapon(selection).getHitChance())//Does it hit?
+							if (hitChance < this->m_Game->m_PlayerShip.getWeapon(selection).getHitChance() + this->m_Game->m_PlayerShip.getEvasion())//Does it hit?
 							{
 								this->m_Game->m_EnemyShip.damage(this->m_Game->m_PlayerShip.getWeapon(selection));
 								this->m_GUISystem.at("enemyHud").m_Entries.at(0).m_Text.setString("Armor: " + std::to_string(this->m_Game->m_EnemyShip.getCurrentArmor()));
@@ -123,7 +123,6 @@ void StateGame::input()
 							}
 							else
 							{
-								
 								std::cerr << "Player Miss!!" << std::endl;
 							}
 							this->m_GUISystem.at("attackMenu").m_Entries.at(selection).m_Text.setString(this->m_Game->m_PlayerShip.getWeapon(selection).getName() +
@@ -271,7 +270,7 @@ StateGame::StateGame(Game* game)
 	this->m_GUISystem.at("playerHud").show();
 	//Draw Enemy HUD
 	this->m_GUISystem.at("enemyHud").setOrigin(this->m_GUISystem.at("enemyHud").getSize().x, 0);
-	this->m_GUISystem.at("enemyHud").setPosition(sf::Vector2f(this->m_Game->m_Window.getSize().x - 15, 10));
+	this->m_GUISystem.at("enemyHud").setPosition(sf::Vector2f(this->m_Game->m_Window.getSize().x - 40, 10));
 	this->m_GUISystem.at("enemyHud").show();
 
 	//set origin of this menu to the center bottom of the GUI
@@ -283,7 +282,7 @@ StateGame::StateGame(Game* game)
 	this->m_GUISystem.at("attackMenu").setPosition(sf::Vector2f(this->m_Game->m_Window.getSize().x * 0.5, this->m_Game->m_Window.getSize().y - 25));
 
 	this->m_GUISystem.at("itemMenu").setOrigin(this->m_GUISystem.at("itemMenu").getSize().x * 0.5f, this->m_GUISystem.at("itemMenu").getSize().y);
-	this->m_GUISystem.at("itemMenu").setPosition(sf::Vector2f(this->m_Game->m_Window.getSize().x * 0.5, this->m_Game->m_Window.getSize().y - 25));
+	this->m_GUISystem.at("itemMenu").setPosition(sf::Vector2f(this->m_Game->m_Window.getSize().x * 0.5 - 50, this->m_Game->m_Window.getSize().y - 25));
 
 	this->m_GUISystem.at("backButton").setOrigin(this->m_GUISystem.at("backButton").getSize().x * 0.5f, this->m_GUISystem.at("backButton").getSize().y);
 	this->m_GUISystem.at("backButton").setPosition(sf::Vector2f(this->m_Game->m_Window.getSize().x * 0.5 + 400, this->m_Game->m_Window.getSize().y - 5));

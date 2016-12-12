@@ -87,6 +87,12 @@ void Ship::increaseEvasion(bool isBoosted, int strength)
 		this->m_Evasion == this->m_MaxEvasion;
 }
 
+int Ship::getEvasion()
+{
+	return this->m_Evasion;
+}
+
+
 void Ship::damage(Weapon weapon)
 {
 	std::string damageType = weapon.getDamageType();

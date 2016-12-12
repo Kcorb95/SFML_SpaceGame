@@ -87,6 +87,8 @@ public:
 
 	void increaseEvasion(bool isBoosted, int strength);
 
+	int getEvasion();
+
 	void damage(Weapon weapon);
 
 	void damage(int amount, int location);
