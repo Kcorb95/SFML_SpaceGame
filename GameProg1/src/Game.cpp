@@ -89,6 +89,13 @@ void Game::loadStyleSheets()
 	return;
 }
 
+void Game::loadSounds()
+{
+	m_SoundManager.loadSound("railFire1", "sound/railFire1.wav");
+	m_SoundManager.loadSound("railFire2", "sound/railFire2.wav");
+	m_SoundManager.loadSound("railFire3", "sound/railFire3.wav");
+}
+
 void Game::loadShips()//This will allow us to create all of the ships for the game and then draw them when needed
 {
 	/*Player Ship*/
@@ -113,6 +120,7 @@ void Game::loadShips()//This will allow us to create all of the ships for the ga
 Game::Game()
 {
 	this->loadTextures();
+	this->loadSounds();
 	this->loadFonts();
 	this->loadStyleSheets();
 	this->loadShips();

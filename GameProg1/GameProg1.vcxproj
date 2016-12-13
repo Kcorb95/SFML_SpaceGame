@@ -23,6 +23,7 @@
     <ClInclude Include="src\GUI.h" />
     <ClInclude Include="src\Item.h" />
     <ClInclude Include="src\Ship.h" />
+    <ClInclude Include="src\SoundManager.h" />
     <ClInclude Include="src\State.h" />
     <ClInclude Include="src\StateGame.h" />
     <ClInclude Include="src\Game.h" />
@@ -36,6 +37,7 @@
     <ClCompile Include="src\Item.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Ship.cpp" />
+    <ClCompile Include="src\SoundManager.cpp" />
     <ClCompile Include="src\StateGame.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\StateMenu.cpp" />

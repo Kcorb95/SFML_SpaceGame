@@ -6,6 +6,7 @@
 #include "TextureManager.h"
 #include "GUI.h"
 #include "Ship.h"
+#include "SoundManager.h"
 
 class State;
 
@@ -13,6 +14,7 @@ class Game
 {
 private:
 	void loadTextures();
+	void loadSounds();
 	void loadStyleSheets();
 	void loadFonts();
 	void loadShips();
@@ -22,6 +24,7 @@ public:
 
 	sf::RenderWindow m_Window;
 	TextureManager m_TextureManager;
+	SoundManager m_SoundManager;
 	sf::Sprite m_Background;
 
 	Ship m_PlayerShip;

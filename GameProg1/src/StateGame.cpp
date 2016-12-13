@@ -117,6 +117,9 @@ void StateGame::input()
 							int hitChance = random(100);
 							if (hitChance < this->m_Game->m_PlayerShip.getWeapon(selection).getHitChance() + this->m_Game->m_PlayerShip.getEvasion())//Does it hit?
 							{
+								this->m_Game->m_SoundManager.getRef("railFire1").setRelativeToListener(true);
+								this->m_Game->m_SoundManager.getRef("railFire1").setLoop(true);
+								this->m_Game->m_SoundManager.getRef("railFire1").play();
 								this->m_Game->m_EnemyShip.damage(this->m_Game->m_PlayerShip.getWeapon(selection));
 								this->m_GUISystem.at("enemyHud").m_Entries.at(0).m_Text.setString("Armor: " + std::to_string(this->m_Game->m_EnemyShip.getCurrentArmor()));
 								this->m_GUISystem.at("enemyHud").m_Entries.at(1).m_Text.setString("Structure: " + std::to_string(this->m_Game->m_EnemyShip.getCurrentStructure()));
