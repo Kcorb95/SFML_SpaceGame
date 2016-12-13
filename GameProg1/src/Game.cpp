@@ -94,13 +94,17 @@ void Game::loadSounds()
 	m_SoundManager.loadSound("railFire1", "sound/railFire1.wav");
 	m_SoundManager.loadSound("railFire2", "sound/railFire2.wav");
 	m_SoundManager.loadSound("railFire3", "sound/railFire3.wav");
+	m_SoundManager.loadSound("rockFire", "sound/rockFire.wav");
+	m_SoundManager.loadSound("miss1", "sound/miss1.wav");
+	m_SoundManager.loadSound("miss2", "sound/miss2.wav");
+	m_SoundManager.loadSound("itemUse", "sound/itemUse.wav");
 }
 
 void Game::loadShips()//This will allow us to create all of the ships for the game and then draw them when needed
 {
 	/*Player Ship*/
 	this->m_PlayerShip = Ship(100, 100, 10, //Structure/Armor/Evasion
-	{ Weapon("Basic Railgun", "Kinetic", 6, 75, 50, 0), Weapon("Basic Missile Launcher", "Ballistic", 15, 50, 10, 2) }, //Weapons
+	{ Weapon("Basic Railgun", "Kinetic", 6, 75, 75, 0, { "railFire1","railFire2","railFire3" }), Weapon("Basic Missile Launcher", "Ballistic", 15, 60, 15, 2, { "rockFire" }) }, //Weapons
 	{ Item(ItemType::ArmorRepair, "Basic Armor Repair", 50, 1), Item(ItemType::EvasionBoost, "Small Thrust Booster", 10, 3) },//Items
 		sf::Vector2f(150, 174), m_TextureManager.getRef("player"),//Dimensions and Texture
 		{ Animation(0, 2, 0.3f), Animation(0, 2, 0.1f),Animation(0, 2, 0.3f) });//Animations
@@ -109,7 +113,7 @@ void Game::loadShips()//This will allow us to create all of the ships for the ga
 
 	/*Starter Enemy Ship*/
 	this->m_EnemyShip = Ship(150, 150, 10, //Structure/Armor/Evasion
-	{ Weapon("Medium Railgun", "Kinetic", 8, 70, 50, 0), Weapon("Light Missile Launcher", "Ballistic", 10, 50, 5, 1) }, //Weapons
+	{ Weapon("Medium Railgun", "Kinetic", 8, 70, 85, 0, {"railFire1","railFire2","railFire3"}), Weapon("Light Missile Launcher", "Ballistic", 10, 50, 5, 1, {"rockFire"}) }, //Weapons
 	{ Item(ItemType::ArmorRepair, "Basic Armor Repair", 50, 1), Item(ItemType::EvasionBoost, "Small Thrust Booster", 10, 3) },//Items
 		sf::Vector2f(150, 174), m_TextureManager.getRef("enemy"),//Dimensions and Texture
 		{ Animation(0, 2, 0.3f), Animation(0, 2, 0.1f),Animation(0, 2, 0.3f) });//Animations

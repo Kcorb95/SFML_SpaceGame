@@ -117,16 +117,18 @@ void StateGame::input()
 							int hitChance = random(100);
 							if (hitChance < this->m_Game->m_PlayerShip.getWeapon(selection).getHitChance() + this->m_Game->m_PlayerShip.getEvasion())//Does it hit?
 							{
-								this->m_Game->m_SoundManager.getRef("railFire1").setRelativeToListener(true);
-								this->m_Game->m_SoundManager.getRef("railFire1").setLoop(true);
-								this->m_Game->m_SoundManager.getRef("railFire1").play();
+								this->m_Game->m_PlayerShip.getWeapon(selection).playSound(this->m_Game->m_SoundManager);
 								this->m_Game->m_EnemyShip.damage(this->m_Game->m_PlayerShip.getWeapon(selection));
 								this->m_GUISystem.at("enemyHud").m_Entries.at(0).m_Text.setString("Armor: " + std::to_string(this->m_Game->m_EnemyShip.getCurrentArmor()));
 								this->m_GUISystem.at("enemyHud").m_Entries.at(1).m_Text.setString("Structure: " + std::to_string(this->m_Game->m_EnemyShip.getCurrentStructure()));
 							}
 							else
 							{
-								std::cerr << "Player Miss!!" << std::endl;
+								srand(time(NULL));
+								std::string r = std::to_string(rand() % (2 - 1) + 1);
+
+								this->m_Game->m_SoundManager.getRef("miss" + r).play();
+								std::cerr << "Player Miss!! || " << hitChance << std::endl;
 							}
 							this->m_GUISystem.at("attackMenu").m_Entries.at(selection).m_Text.setString(this->m_Game->m_PlayerShip.getWeapon(selection).getName() +
 								" Ammo: " + std::to_string(this->m_Game->m_PlayerShip.getWeapon(selection).getCurrentAmmo()) + "/" + std::to_string(this->m_Game->m_PlayerShip.getWeapon(selection).getMaxAmmo()));
@@ -146,7 +148,7 @@ void StateGame::input()
 						{
 							int selection = std::stoi(msg.std::string::substr(5, 1));
 							this->m_Game->m_PlayerShip.useItem(this->m_Game->m_PlayerShip.getItem(selection));
-
+							this->m_Game->m_SoundManager.getRef("itemUse").play();
 							//Remove the used item from inventory (maybe have multi-use items)
 							std::swap(m_Game->m_PlayerShip.m_Items.at(selection), m_Game->m_PlayerShip.m_Items.back());//swap used item with item at back of array
 							m_Game->m_PlayerShip.m_Items.pop_back();//pop the last element off
@@ -194,7 +196,7 @@ StateGame::StateGame(Game* game)
 	* Player HUD
 	************
 	*/
-	this->m_GUISystem.emplace("playerHud", GUI(sf::Vector2f(175, 30), 2, false, this->m_Game->m_StyleSheets.at("hud"),
+	this->m_GUISystem.emplace("playerHud", GUI(sf::Vector2f(210, 30), 2, false, this->m_Game->m_StyleSheets.at("hud"),
 	{
 		std::make_pair("Armor: " + std::to_string(this->m_Game->m_PlayerShip.getCurrentArmor()), "armor"),
 		std::make_pair("Structure: " + std::to_string(this->m_Game->m_PlayerShip.getCurrentStructure()), "structure")
@@ -205,7 +207,7 @@ StateGame::StateGame(Game* game)
 	* Enemy HUD
 	***********
 	*/
-	this->m_GUISystem.emplace("enemyHud", GUI(sf::Vector2f(175, 30), 2, false, this->m_Game->m_StyleSheets.at("hud"),
+	this->m_GUISystem.emplace("enemyHud", GUI(sf::Vector2f(210, 30), 2, false, this->m_Game->m_StyleSheets.at("hud"),
 	{
 		std::make_pair("Armor: " + std::to_string(this->m_Game->m_EnemyShip.getCurrentArmor()), "armor"),
 		std::make_pair("Structure: " + std::to_string(this->m_Game->m_EnemyShip.getCurrentStructure()), "structure")
@@ -303,7 +305,6 @@ void StateGame::enemyAction()
 	while (!found)
 	{
 		weaponSelection = random(this->m_Game->m_EnemyShip.m_Weapons.size());
-		std::cerr << "Random: " << weaponSelection << std::endl;
 		if (this->m_Game->m_EnemyShip.getWeapon(weaponSelection).getCurrentAmmo() > 0)//is there enough ammo to do this?
 		{
 			hitChance = random(100);
@@ -312,10 +313,10 @@ void StateGame::enemyAction()
 				fireWeapon(weaponSelection);//hit
 			}
 			else
-				std::cerr << "MISS!! " << hitChance << std::endl;
+				std::cerr << "Enemy Miss!! || " << hitChance << std::endl;
 			found = true;
 		}
-		else { std::cerr << "Not Enough Ammo"; }
+		else { std::cerr << "Not Enough Ammo" << std::endl; }
 	}
 
 	this->m_GUISystem.at("playerHud").m_Entries.at(0).m_Text.setString("Armor: " + std::to_string(this->m_Game->m_PlayerShip.getCurrentArmor()));
@@ -323,7 +324,8 @@ void StateGame::enemyAction()
 
 	if (!this->m_Game->m_PlayerShip.isAlive)
 	{
-		std::cerr << "you lose!";
+		std::cerr << "You Lose!!";
+		this->m_Game->pushState(new StateMenu(this->m_Game));//Go to main menu
 	}
 }
 

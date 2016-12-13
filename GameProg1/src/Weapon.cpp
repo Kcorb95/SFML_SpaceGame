@@ -20,7 +20,6 @@ int Weapon::getHitChance()
 	return this->m_HitChance;
 }
 
-
 int Weapon::getMaxAmmo()
 {
 	return this->m_MaxAmmo;
@@ -44,4 +43,12 @@ void Weapon::decreaseAmmo()
 void Weapon::increaseAmmo(int amount)
 {
 	this->m_CurrentAmmo += amount;
+}
+
+void Weapon::playSound(SoundManager& soundManager)
+{
+	srand(time(NULL));
+	int r = rand() % (this->m_SoundEffects.size() - 0) + 0;
+
+	soundManager.getRef(this->m_SoundEffects.at(r)).play();
 }

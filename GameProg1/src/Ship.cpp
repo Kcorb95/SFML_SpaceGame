@@ -135,12 +135,12 @@ void Ship::damage(int amount, int location)
 void Ship::damageArmor(int amount)
 {
 	if (this->m_Armor == 0)//If no remaining Armor
-		this->m_Structure -= (amount / 2);//Deal reduced damage to structure
+		damageStructure(amount / 2);//Deal reduced damage to structure
 	else if (amount > this->m_Armor)//if you deal more damage than there is remaining armor
 	{
 		amount -= this->m_Armor;//reduce the amount of damage by the remaining armor
 		this->m_Armor = 0;//set armor to zero since you just "dealt" that damage
-		this->m_Structure -= (amount / 2);//deal the reduced remaining damage
+		damageStructure(amount / 2);//deal the reduced remaining damage
 	}
 	else//damage Armor for normal amount
 		this->m_Armor -= amount;
