@@ -2,7 +2,6 @@
 
 #include <SFML/Graphics.hpp>
 #include <map>
-#include <string>
 
 #include "State.h"
 #include "GUI.h"

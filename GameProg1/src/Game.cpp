@@ -91,13 +91,13 @@ void Game::loadStyleSheets()
 
 void Game::loadSounds()
 {
-	m_SoundManager.loadSound("railFire1", "sound/railFire1.wav");
-	m_SoundManager.loadSound("railFire2", "sound/railFire2.wav");
-	m_SoundManager.loadSound("railFire3", "sound/railFire3.wav");
-	m_SoundManager.loadSound("rockFire", "sound/rockFire.wav");
-	m_SoundManager.loadSound("miss1", "sound/miss1.wav");
-	m_SoundManager.loadSound("miss2", "sound/miss2.wav");
-	m_SoundManager.loadSound("itemUse", "sound/itemUse.wav");
+	m_SoundManager.loadSound("railFire1", "sounds/railFire1.wav");
+	m_SoundManager.loadSound("railFire2", "sounds/railFire2.wav");
+	m_SoundManager.loadSound("railFire3", "sounds/railFire3.wav");
+	m_SoundManager.loadSound("rockFire", "sounds/rockFire.wav");
+	m_SoundManager.loadSound("miss1", "sounds/miss1.wav");
+	m_SoundManager.loadSound("miss2", "sounds/miss2.wav");
+	m_SoundManager.loadSound("itemUse", "sounds/itemUse.wav");
 }
 
 void Game::loadShips()//This will allow us to create all of the ships for the game and then draw them when needed

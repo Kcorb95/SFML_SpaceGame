@@ -10,12 +10,15 @@
 class Ship
 {
 private:
+	//Current and Maximum Armor
 	int m_Armor;
 	int m_MaxArmor;
 
+	//Current and Maximum Structure
 	int m_Structure;
 	int m_MaxStructure;
 
+	//Current and Maximum Evasion
 	int m_Evasion;
 	int m_MaxEvasion;
 
@@ -23,14 +26,22 @@ public:
 	AnimationHandler m_AnimationHandler;
 	sf::Sprite m_Sprite;
 
+	//Vector of available weapons
 	std::vector<Weapon> m_Weapons;
+
+	//Vector of available items
 	std::vector<Item> m_Items;
+
+	//Vector of Item pairs that the ship has available
 	std::vector<std::pair<std::string, std::string>> m_ItemPairs;
 
 	//Allows different looking versions of the same ship
 	int shipVariant = 0;
 
+	//Is the ship still above 0 structure?
 	bool isAlive = true;
+	
+	//is the ships evasion currently boosted?
 	bool m_IsBoosted = false;
 
 	Ship() { }

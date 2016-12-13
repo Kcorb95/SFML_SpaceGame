@@ -1,8 +1,6 @@
 #pragma once
-#pragma once
 #include <SFML/Audio.hpp>
 #include <map>
-#include <memory>
 
 class SoundManager
 {
@@ -10,11 +8,8 @@ private:
 	// The buffers
 	std::map<std::string, sf::SoundBuffer> m_SoundBuffers;
 
-	// The Sounds
+	// The sounds
 	std::map<std::string, sf::Sound> m_Sounds;
-
-	// Which sound should we use next, fire 1, 2 or 3
-	int m_NextSound = 1;
 
 public:
 

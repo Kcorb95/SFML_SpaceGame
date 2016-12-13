@@ -58,6 +58,44 @@
     <Font Include="fonts\game_sans_serif_7.ttf" />
     <Font Include="fonts\Gang Wolfik Craze.otf" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="sound\ArmorUp.wav" />
+    <Media Include="sound\bombExplosion.wav" />
+    <Media Include="sound\highDown.mp3" />
+    <Media Include="sound\itemUse.wav" />
+    <Media Include="sound\laser1.mp3" />
+    <Media Include="sound\laser2.mp3" />
+    <Media Include="sound\laser3.mp3" />
+    <Media Include="sound\lowLoop.wav" />
+    <Media Include="sound\miss1.wav" />
+    <Media Include="sound\miss2.wav" />
+    <Media Include="sound\missileMiss1.mp3" />
+    <Media Include="sound\missileMiss2.mp3" />
+    <Media Include="sound\negative1.mp3" />
+    <Media Include="sound\negative2.mp3" />
+    <Media Include="sound\negative3.mp3" />
+    <Media Include="sound\railFire1.wav" />
+    <Media Include="sound\railFire2.wav" />
+    <Media Include="sound\railFire3.wav" />
+    <Media Include="sound\rockFire.wav" />
+    <Media Include="sound\shield1.wav" />
+    <Media Include="sound\shield2.wav" />
+    <Media Include="sound\shield3.wav" />
+    <Media Include="sound\shield4.wav" />
+    <Media Include="sound\shield5.wav" />
+    <Media Include="sound\shield6.wav" />
+    <Media Include="sound\shield7.wav" />
+    <Media Include="sound\shield8.wav" />
+    <Media Include="sound\shield9.wav" />
+    <Media Include="sound\shieldDown1.wav" />
+    <Media Include="sound\shieldDown2.wav" />
+    <Media Include="sound\shieldUp1.wav" />
+    <Media Include="sound\shieldUp2.wav" />
+    <Media Include="sound\spaceAmbient.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sound\battleLoop.ogg" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{d839bf83-03e2-4827-8902-9bfac08cfdb7}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
