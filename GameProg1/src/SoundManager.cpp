@@ -14,6 +14,7 @@ void SoundManager::loadSound(const std::string& name, const std::string& filenam
 	this->m_SoundBuffers[name] = soundBuffer;
 	this->m_Sounds[name] = sound;
 	this->m_Sounds[name].setBuffer(this->m_SoundBuffers[name]);
+	this->m_Sounds[name].setVolume(65);
 	return;
 }
 

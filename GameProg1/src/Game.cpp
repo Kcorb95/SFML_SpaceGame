@@ -98,6 +98,12 @@ void Game::loadSounds()
 	m_SoundManager.loadSound("miss1", "sounds/miss1.wav");
 	m_SoundManager.loadSound("miss2", "sounds/miss2.wav");
 	m_SoundManager.loadSound("itemUse", "sounds/itemUse.wav");
+
+	this->m_GameMusic.openFromFile("sounds/gameMusic.wav");
+	this->m_GameMusic.setLoop(true); 
+	
+	this->m_MenuMusic.openFromFile("sounds/menuMusic.ogg");
+	this->m_MenuMusic.setLoop(true);
 }
 
 void Game::loadShips()//This will allow us to create all of the ships for the game and then draw them when needed

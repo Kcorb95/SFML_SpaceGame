@@ -291,6 +291,11 @@ StateGame::StateGame(Game* game)
 
 	this->m_GUISystem.at("backButton").setOrigin(this->m_GUISystem.at("backButton").getSize().x * 0.5f, this->m_GUISystem.at("backButton").getSize().y);
 	this->m_GUISystem.at("backButton").setPosition(sf::Vector2f(this->m_Game->m_Window.getSize().x * 0.5 + 400, this->m_Game->m_Window.getSize().y - 5));
+
+	//Play m_GameMusic
+	this->m_Game->m_MenuMusic.stop();
+	this->m_Game->m_GameMusic.play();
+
 }
 
 void StateGame::enemyAction()

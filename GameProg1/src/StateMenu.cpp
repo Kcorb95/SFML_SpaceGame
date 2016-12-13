@@ -75,6 +75,8 @@ void StateMenu::input()
 					}
 					else if (msg == "continue_game")
 					{
+						this->m_Game->m_MenuMusic.stop();
+						this->m_Game->m_GameMusic.play();
 						m_Game->m_States.pop();
 					}
 				}
@@ -120,4 +122,7 @@ StateMenu::StateMenu(Game* game)
 	this->m_GUISystem.at("menu").setOrigin(this->m_GUISystem.at("menu").getSize().x * 0.5f, this->m_GUISystem.at("menu").getSize().y * 0.5f);
 	this->m_GUISystem.at("menu").setPosition(pos);
 	this->m_GUISystem.at("menu").show();
+
+	this->m_Game->m_GameMusic.stop();
+	this->m_Game->m_MenuMusic.play();
 }

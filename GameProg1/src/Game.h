@@ -30,6 +30,9 @@ public:
 	Ship m_PlayerShip;
 	Ship m_EnemyShip;
 
+	sf::Music m_GameMusic;
+	sf::Music m_MenuMusic;
+
 	std::map<std::string, GUIStyle> m_StyleSheets;
 	std::map<std::string, sf::Font> m_Fonts;
 
