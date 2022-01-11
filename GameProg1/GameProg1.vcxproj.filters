@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resource Files\graphics">
+      <UniqueIdentifier>{71a45577-c17b-427d-b2ef-1eddb0b24dc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\fonts">
+      <UniqueIdentifier>{f8f5be0a-df5e-42c3-b14a-6138c3b005af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\sounds">
+      <UniqueIdentifier>{f20111ee-ea5f-4239-a074-7073d713539f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Weapon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\State.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StateMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\StateGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TextureManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AnimationHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Ship.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SoundManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Weapon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StateMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\StateGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TextureManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AnimationHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Ship.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SoundManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="graphics\background.png">
+      <Filter>Resource Files\graphics</Filter>
+    </Image>
+    <Image Include="graphics\backgroundMenu.png">
+      <Filter>Resource Files\graphics</Filter>
+    </Image>
+    <Image Include="graphics\shipFour.png">
+      <Filter>Resource Files\graphics</Filter>
+    </Image>
+    <Image Include="graphics\shipFourSheet.png">
+      <Filter>Resource Files\graphics</Filter>
+    </Image>
+    <Image Include="graphics\shipOne.png">
+      <Filter>Resource Files\graphics</Filter>
+    </Image>
+    <Image Include="graphics\shipThree.png">
+      <Filter>Resource Files\graphics</Filter>
+    </Image>
+    <Image Include="graphics\shipTwo.png">
+      <Filter>Resource Files\graphics</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="fonts\Gang Wolfik Craze.otf">
+      <Filter>Resource Files\fonts</Filter>
+    </Font>
+    <Font Include="fonts\Game Robot.ttf">
+      <Filter>Resource Files\fonts</Filter>
+    </Font>
+    <Font Include="fonts\game_sans_serif_7.ttf">
+      <Filter>Resource Files\fonts</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="sound\ArmorUp.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\bombExplosion.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\highDown.mp3">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\itemUse.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\laser1.mp3">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\laser2.mp3">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\laser3.mp3">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\lowLoop.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\miss1.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\miss2.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\missileMiss1.mp3">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\missileMiss2.mp3">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\negative1.mp3">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\negative2.mp3">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\negative3.mp3">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\railFire1.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\railFire2.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\railFire3.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\rockFire.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\shield1.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\shield2.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\shield3.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\shield4.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\shield5.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\shield6.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\shield7.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\shield8.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\shield9.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\shieldDown1.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\shieldDown2.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\shieldUp1.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\shieldUp2.wav">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+    <Media Include="sound\spaceAmbient.mp3">
+      <Filter>Resource Files\sounds</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sound\battleLoop.ogg">
+      <Filter>Resource Files\sounds</Filter>
+    </None>
+  </ItemGroup>
+</Project>
